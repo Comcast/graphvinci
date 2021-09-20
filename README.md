@@ -3,7 +3,7 @@
 A better schema visualizer for GraphQL APIs - view your schema in a draggable, zoomable and collapsible way.  Built to introspect large interconnected schemas, to promote a better understanding of your data
 
 View as much or as little of your schema as you need, organized however you like...
-![image](https://user-images.githubusercontent.com/8096993/134034873-c35244e6-226c-41bd-b807-f2df35d36f1f.png)
+![init](https://user-images.githubusercontent.com/8096993/134035993-57aafae3-9916-4f1f-abda-1b892bb39d21.gif)
 
 ## What is GraphVinci?
 
@@ -15,7 +15,7 @@ Divide your schema into logical domains, and then use these to group, view and m
 
 Create and save custom, shareable schema views that promote cross-developer data understanding
 
-![image](https://user-images.githubusercontent.com/8096993/134034951-4adab1a1-7213-4f92-931b-05ad51b6effc.png)
+![demo](https://user-images.githubusercontent.com/8096993/134036095-e1bf5a1c-c638-4abc-87a2-73570d9bf2e5.gif)
 
 ## How can I run GraphVinci?
 
