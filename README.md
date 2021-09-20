@@ -1,4 +1,4 @@
-![image](https://github.comcast.com/storage/user/581/files/9f181e00-ed95-11eb-9774-93dc4e52a843)
+![image](https://user-images.githubusercontent.com/8096993/134034741-2f699803-ae8a-4b98-bd9b-ac972e04784e.png)
 
 A better schema visualizer for GraphQL APIs - view your schema in a draggable, zoomable and collapsible way.  Built to introspect large interconnected schemas, to promote a better understanding of your data
 
