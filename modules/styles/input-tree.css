@@ -1,0 +1,34 @@
+.input-tree__outer {
+    transform: rotateZ(180deg);
+    resize: both;
+    overflow: auto;
+    padding: 6px 6px 6px 6px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    height: 400px;
+    width: 300px;
+    background-color: #575757;
+}
+
+.input-tree__inner {
+    transform: rotateZ(180deg);
+    width: 100%;
+    height: 100%;
+    overflow: none;
+    background-color: #fff;
+}
+
+.input-tree__remove {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    background-color: #575757;
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom-left-radius: 5px;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}

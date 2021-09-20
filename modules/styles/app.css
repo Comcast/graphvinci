@@ -1,0 +1,510 @@
+html, body {margin:0;padding:0;height:100%;}
+
+.header {
+    width: 100%;
+    height: 65px;
+}
+
+.textoutput {
+    position: fixed;
+    width: 500px;
+    height: 800px;
+    top: 50%;
+    left: 50%;
+    margin-top: -400px; /* Negative half of height. */
+    margin-left: -250px; /* Negative half of width. */
+    background-color: #fff;
+}
+
+.textoutputcontents {
+    width: 100%;
+    height: 100%;
+}
+
+.vizcontainer {
+    width: 100%;
+    height: calc(100% - 65px);
+}
+
+.actioncentral {
+    width: 100%;
+    height: 100%;
+}
+
+.modecontainer {
+    width: 100%;
+    height: calc(100% - 42px);
+}
+
+.querywindow {
+    width: 400px;
+    height: 100%;
+    float: left;
+    background-color: #fff;
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.querycodewindow {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 200px);
+    background-color: #fff;
+}
+
+.queryvarswindow {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background-color: #fff;
+}
+
+.resultscontainer {
+    width: calc(100% - 400px);
+    height: 100%;
+    float: left;
+    background-color: #fff;
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.querygraph {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #fff;
+}
+
+.flippableinner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.flippablemenu {
+    position: absolute;
+    width: 96px;
+    height: 45px;
+    top: 0;
+    right: 0;
+    background-color: white;
+}
+
+.mirrorarea2 {
+    height: 500px;
+}
+
+.resultsgraph {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 400px);
+    background-color: #fff;
+}
+
+.graphcontainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-color: #fff;
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+}
+
+.horizontalmenu {
+    width: 100%;
+    height: 40px;
+    background-color: #f6f6f6;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.schemapending {
+    width: 100%;
+    height: 40px;
+    background-color: #f6f6f6;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+    display : flex;
+    align-items : center;
+    justify-content: center;
+    font-size: 1.5em;
+    padding: 20px;
+    color: #6e6e6e;
+}
+
+.horizontalmenu line {
+    stroke: #e2e2e2;
+}
+
+.textsearch {
+    width: 300px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 5px;
+    float: right;
+}
+
+.verticalmenu {
+    float: left;
+    height: 100%;
+    width: 225px;
+    background-color: #f6f6f6;
+    border-right: 2px solid #e2e2e2;
+    box-sizing: border-box;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.domainheader {
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+    font-size: 50px;
+}
+
+.websecScope {
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+}
+
+.menubar {
+    position: fixed;
+    top: 65px;
+    left: 0;
+}
+
+.menuheader {
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+    font-size: 10px;
+}
+
+.buttonunselected {
+    opactiy: 0.9
+}
+
+.buttonselected {
+    opacity: 1
+}
+
+.hiddensizing {
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+}
+
+.remove {
+    cursor: pointer;
+}
+
+.mousepointer {
+    cursor: pointer;
+}
+
+.mousecopy {
+    cursor: copy;
+}
+
+.mouseedit {
+    cursor: text;
+}
+
+.removeX {
+
+}
+
+.regulararrow {
+    fill: #999;
+}
+
+.queryarrow {
+    fill: #9effa3;
+}
+
+.mutationarrow {
+    fill: #a4c9ff;
+}
+
+.linkline {
+    stroke: #444;
+}
+
+.inputline {
+    stroke: #444;
+}
+
+.edgeline {
+    stroke: #444;
+}
+
+.redgeline {
+    stroke: #444;
+}
+
+.inputegeline {
+    stroke: #444;
+}
+
+.fieldwithargs {
+    fill: #ff0400;
+}
+
+.quiet {
+    opacity: 0.4
+}
+
+/*
+Styling for input
+ */
+
+.searchbar {
+    position: fixed;
+    top: 24px;
+    right: 0px;
+    height: 33px;
+    width: 400px;
+}
+
+.searchtext {
+    width: 100%;
+    //border: 2px solid #aaa;
+    border: none;
+    //border-radius: 10px;
+    margin: 5px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: 0.3s;
+    padding-left: 40px;
+}
+
+/*
+Styling for pushing layout
+ */
+
+.pushlayout{
+        position: fixed;
+        left: 225px;
+        top: 108px;
+        max-width: 300px;
+        padding: 10px 20px;
+        background: #f6f6f6;
+        font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+        border-right: 1px solid #e2e2e2;
+        border-bottom: 1px solid #e2e2e2;
+}
+.pushlayout fieldset{
+        border: none;
+}
+
+.pushlayout h2 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        color: #6e6e6e;
+}
+.pushlayout label {
+        display: block;
+        margin-bottom: 8px;
+}
+.pushlayout input[type="text"],
+.pushlayout input[type="date"],
+.pushlayout input[type="datetime"],
+.pushlayout input[type="email"],
+.pushlayout input[type="number"],
+.pushlayout input[type="search"],
+.pushlayout input[type="time"],
+.pushlayout input[type="url"],
+.pushlayout textarea,
+.pushlayout select {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        background: rgba(255,255,255,.1);
+        border: none;
+        border-radius: 4px;
+        font-size: 15px;
+        margin: 0;
+        outline: 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        background-color: #e8eeef;
+        color:#8a97a0;
+        -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+        margin-bottom: 10px;
+}
+
+.pushlayout input[type=text].sliminput, .sliminput {width:260px;}
+
+
+.pushlayout input[type="text"]:focus,
+.pushlayout input[type="date"]:focus,
+.pushlayout input[type="datetime"]:focus,
+.pushlayout input[type="email"]:focus,
+.pushlayout input[type="number"]:focus,
+.pushlayout input[type="search"]:focus,
+.pushlayout input[type="time"]:focus,
+.pushlayout input[type="url"]:focus,
+.pushlayout textarea:focus,
+.pushlayout select:focus{
+        background: #d2d9dd;
+}
+.pushlayout select{
+        -webkit-appearance: menulist-button;
+        height:35px;
+}
+.pushlayout .number {
+        background: #1abc9c;
+        color: #fff;
+        height: 30px;
+        width: 30px;
+        display: inline-block;
+        font-size: 0.8em;
+        margin-right: 4px;
+        line-height: 30px;
+        text-align: center;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+        border-radius: 15px 15px 15px 0px;
+}
+
+.pushlayout input[type="submit"]
+{
+        position: relative;
+        display: block;
+        color: #FFF;
+        margin: 0 auto;
+        background: #a0a0a0;
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+}
+
+.pushlayout input[type="button"]
+{
+
+    float: right;
+    display: block;
+    color: #FFF;
+    margin: 0 auto;
+    background: #a0a0a0;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 37px;
+    margin: 0;
+    padding: 7px;
+    //border-radius: 10px;
+}
+
+.pushlayout input[type="submit"]:hover,
+.pushlayout input[type="button"]:hover
+{
+        background: #109177;
+}
+
+.mirrorarea {
+    height: auto;
+}
+
+.gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-vertical {
+    cursor: row-resize;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+}
+
+.gutter.gutter-horizontal {
+    cursor: col-resize;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+}
+
+.split.split-horizontal, .gutter.gutter-horizontal {
+    height: 100%;
+    float: left;
+}
+
+.dectype {
+     font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+     font-weight: bold;
+     font-size: 32px;
+     fill: white;
+}
+
+.dectypesmall {
+    font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    fill: white;
+}
+
+.vizhistory {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.vhtitle {
+    float: left;
+    text-align: center;
+    border-right: 5px solid #f6f6f6;
+    padding: 10px;
+    font-family: 'ui-monospace';
+    font-weight: bolder;
+    color: #5c5c5c;
+    font-size: 1.4em;
+    background: #f1f1f1;
+}
+
+.historysearch {
+    background-color: #fff;
+    margin-left: 20px;
+    padding-left: 10px;
+    border: none;
+    float: right;
+    font-family: 'ui-monospace';
+    font-weight: bolder;
+    color: #a7a7a7;
+    font-size: 1.0em;
+}
+
+.historysearch:focus {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.historysearch::placeholder {
+    color: #a7a7a7;
+}
+
+.wheelcontainer {
+    opacity: 0.8;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border: #ffffff 5px solid;
+    border-radius: 100px;
+}
+
+.vertmenucontainer {
+    opacity: 0.8;
+    position: absolute;
+    width: 225px;
+    top: 0;
+    left: 0;
+}

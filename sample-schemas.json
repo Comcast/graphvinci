@@ -1,0 +1,759 @@
+{
+  "Starwars": {
+    "name": "Starwars (Demo)",
+    "url": "",
+    "headers": "",
+    "authName": "None",
+    "sdl": "\"\"\"\nThe query type, represents all of the entry points into our object graph\n\"\"\"\ntype Query {\n  hero(episode: Episode): Character\n  reviews(episode: Episode!): [Review]\n  search(text: String): [SearchResult]\n  character(id: ID!): Character\n  droid(id: ID!): Droid\n  human(id: ID!): Human\n  starship(id: ID!): Starship\n}\n\n\"\"\"The mutation type, represents all updates we can make to our data\"\"\"\ntype Mutation {\n  createReview(episode: Episode, review: ReviewInput!): Review\n}\n\n\"\"\"\nThe subscription type, represents all subscriptions we can make to our data\n\"\"\"\ntype Subscription {\n  reviewAdded(episode: Episode): Review\n}\n\n\"\"\"The episodes in the Star Wars trilogy\"\"\"\nenum Episode {\n  \"\"\"Star Wars Episode IV: A New Hope, released in 1977.\"\"\"\n  NEWHOPE\n\n  \"\"\"Star Wars Episode V: The Empire Strikes Back, released in 1980.\"\"\"\n  EMPIRE\n\n  \"\"\"Star Wars Episode VI: Return of the Jedi, released in 1983.\"\"\"\n  JEDI\n}\n\n\"\"\"A character from the Star Wars universe\"\"\"\ninterface Character {\n  \"\"\"The ID of the character\"\"\"\n  id: ID!\n\n  \"\"\"The name of the character\"\"\"\n  name: String!\n\n  \"\"\"The friends of the character, or an empty list if they have none\"\"\"\n  friends: [Character]\n\n  \"\"\"The friends of the character exposed as a connection with edges\"\"\"\n  friendsConnection(first: Int, after: ID): FriendsConnection!\n\n  \"\"\"The movies this character appears in\"\"\"\n  appearsIn: [Episode]!\n}\n\n\"\"\"Units of height\"\"\"\nenum LengthUnit {\n  \"\"\"The standard unit around the world\"\"\"\n  METER\n\n  \"\"\"Primarily used in the United States\"\"\"\n  FOOT\n}\n\n\"\"\"A humanoid creature from the Star Wars universe\"\"\"\ntype Human implements Character {\n  \"\"\"The ID of the human\"\"\"\n  id: ID!\n\n  \"\"\"What this human calls themselves\"\"\"\n  name: String!\n\n  \"\"\"The home planet of the human, or null if unknown\"\"\"\n  homePlanet: String\n\n  \"\"\"Height in the preferred unit, default is meters\"\"\"\n  height(unit: LengthUnit = METER): Float\n\n  \"\"\"Mass in kilograms, or null if unknown\"\"\"\n  mass: Float\n\n  \"\"\"This human's friends, or an empty list if they have none\"\"\"\n  friends: [Character]\n\n  \"\"\"The friends of the human exposed as a connection with edges\"\"\"\n  friendsConnection(first: Int, after: ID): FriendsConnection!\n\n  \"\"\"The movies this human appears in\"\"\"\n  appearsIn: [Episode]!\n\n  \"\"\"A list of starships this person has piloted, or an empty list if none\"\"\"\n  starships: [Starship]\n}\n\n\"\"\"An autonomous mechanical character in the Star Wars universe\"\"\"\ntype Droid implements Character {\n  \"\"\"The ID of the droid\"\"\"\n  id: ID!\n\n  \"\"\"What others call this droid\"\"\"\n  name: String!\n\n  \"\"\"This droid's friends, or an empty list if they have none\"\"\"\n  friends: [Character]\n\n  \"\"\"The friends of the droid exposed as a connection with edges\"\"\"\n  friendsConnection(first: Int, after: ID): FriendsConnection!\n\n  \"\"\"The movies this droid appears in\"\"\"\n  appearsIn: [Episode]!\n\n  \"\"\"This droid's primary function\"\"\"\n  primaryFunction: String\n}\n\n\"\"\"A connection object for a character's friends\"\"\"\ntype FriendsConnection {\n  \"\"\"The total number of friends\"\"\"\n  totalCount: Int\n\n  \"\"\"The edges for each of the character's friends.\"\"\"\n  edges: [FriendsEdge]\n\n  \"\"\"A list of the friends, as a convenience when edges are not needed.\"\"\"\n  friends: [Character]\n\n  \"\"\"Information for paginating this connection\"\"\"\n  pageInfo: PageInfo!\n}\n\n\"\"\"An edge object for a character's friends\"\"\"\ntype FriendsEdge {\n  \"\"\"A cursor used for pagination\"\"\"\n  cursor: ID!\n\n  \"\"\"The character represented by this friendship edge\"\"\"\n  node: Character\n}\n\n\"\"\"Information for paginating this connection\"\"\"\ntype PageInfo {\n  startCursor: ID\n  endCursor: ID\n  hasNextPage: Boolean!\n}\n\n\"\"\"Represents a review for a movie\"\"\"\ntype Review {\n  \"\"\"The movie\"\"\"\n  episode: Episode\n\n  \"\"\"The number of stars this review gave, 1-5\"\"\"\n  stars: Int!\n\n  \"\"\"Comment about the movie\"\"\"\n  commentary: String\n}\n\n\"\"\"The input object sent when someone is creating a new review\"\"\"\ninput ReviewInput {\n  \"\"\"0-5 stars\"\"\"\n  stars: Int!\n\n  \"\"\"Comment about the movie, optional\"\"\"\n  commentary: String\n\n  \"\"\"Favorite color, optional\"\"\"\n  favorite_color: ColorInput\n}\n\n\"\"\"The input object sent when passing in a color\"\"\"\ninput ColorInput {\n  red: Int!\n  green: Int!\n  blue: Int!\n}\n\ntype Starship {\n  \"\"\"The ID of the starship\"\"\"\n  id: ID!\n\n  \"\"\"The name of the starship\"\"\"\n  name: String!\n\n  \"\"\"Length of the starship, along the longest axis\"\"\"\n  length(unit: LengthUnit = METER): Float\n  coordinates: [[Float!]!]\n}\n\nunion SearchResult = Human | Droid | Starship\n",
+    "savedViews": {
+      "CMT": {
+        "demo": {
+          "Everything": {
+            "domainKey": "CHARACTERS-MOVIES-SEARCH-TRANSPORTATION",
+            "currentZoom": {
+              "k": 2.8020437705383454,
+              "x": -8041.743466674687,
+              "y": -6120.802684035092
+            },
+            "nodes": {
+              "Human": {
+                "id": "Human",
+                "posX": 4879.736258175967,
+                "posY": 3097.2995289541595,
+                "open": true
+              },
+              "Droid": {
+                "id": "Droid",
+                "posX": 4876.826244193393,
+                "posY": 3657.9186856733563,
+                "open": true
+              },
+              "FriendsConnection": {
+                "id": "FriendsConnection",
+                "posX": 4208.726264976902,
+                "posY": 3848.904672382679,
+                "open": true
+              },
+              "FriendsEdge": {
+                "id": "FriendsEdge",
+                "posX": 3795.8178064054578,
+                "posY": 3890.598626163615,
+                "open": true
+              },
+              "PageInfo": {
+                "id": "PageInfo",
+                "posX": 4481.594245516771,
+                "posY": 4138.143887997992,
+                "open": true
+              },
+              "Review": {
+                "id": "Review",
+                "posX": 3652.0374410730906,
+                "posY": 3109.1645650699006,
+                "open": true
+              },
+              "Starship": {
+                "id": "Starship",
+                "posX": 4492.107087262576,
+                "posY": 2803.904838465293,
+                "open": true
+              },
+              "Character": {
+                "id": "Character",
+                "posX": 3606.1821084286075,
+                "posY": 3575.637133379876,
+                "open": true
+              },
+              "SearchResult": {
+                "id": "SearchResult",
+                "posX": 4140.793941373828,
+                "posY": 2933.191333353161,
+                "open": true
+              },
+              "QUERY - hero": {
+                "id": "QUERY - hero",
+                "posX": 3137.805404823101,
+                "posY": 3614.814841956011,
+                "open": true
+              },
+              "QUERY - reviews": {
+                "id": "QUERY - reviews",
+                "posX": 3174.482543227607,
+                "posY": 3045.2867658862083,
+                "open": true
+              },
+              "QUERY - search": {
+                "id": "QUERY - search",
+                "posX": 3575.8295105021143,
+                "posY": 2757.9575540159854,
+                "open": true
+              },
+              "QUERY - character": {
+                "id": "QUERY - character",
+                "posX": 3151.417062930411,
+                "posY": 3477.4824585906,
+                "open": true
+              },
+              "QUERY - droid": {
+                "id": "QUERY - droid",
+                "posX": 5383.950394473712,
+                "posY": 3518.4479744748023,
+                "open": true
+              },
+              "QUERY - human": {
+                "id": "QUERY - human",
+                "posX": 5246.97821539493,
+                "posY": 2853.7383616447705,
+                "open": true
+              },
+              "QUERY - starship": {
+                "id": "QUERY - starship",
+                "posX": 4134.461044024741,
+                "posY": 2622.508682002906,
+                "open": true
+              },
+              "MUTATION - createReview": {
+                "id": "MUTATION - createReview",
+                "posX": 3221.7412643847733,
+                "posY": 3241.003745585091,
+                "open": true
+              },
+              "Episode": {
+                "id": "Episode",
+                "posX": 4021.8519396612755,
+                "posY": 3169.8018185797,
+                "open": true
+              }
+            },
+            "edges": {
+              "HumanfriendsCharacter": {
+                "id": "HumanfriendsCharacter"
+              },
+              "HumanfriendsConnectionFriendsConnection": {
+                "id": "HumanfriendsConnectionFriendsConnection"
+              },
+              "HumanappearsInEpisode": {
+                "id": "HumanappearsInEpisode"
+              },
+              "HumanstarshipsStarship": {
+                "id": "HumanstarshipsStarship"
+              },
+              "DroidfriendsCharacter": {
+                "id": "DroidfriendsCharacter"
+              },
+              "DroidfriendsConnectionFriendsConnection": {
+                "id": "DroidfriendsConnectionFriendsConnection"
+              },
+              "DroidappearsInEpisode": {
+                "id": "DroidappearsInEpisode"
+              },
+              "FriendsConnectionedgesFriendsEdge": {
+                "id": "FriendsConnectionedgesFriendsEdge"
+              },
+              "FriendsConnectionfriendsCharacter": {
+                "id": "FriendsConnectionfriendsCharacter"
+              },
+              "FriendsConnectionpageInfoPageInfo": {
+                "id": "FriendsConnectionpageInfoPageInfo"
+              },
+              "FriendsEdgenodeCharacter": {
+                "id": "FriendsEdgenodeCharacter"
+              },
+              "ReviewepisodeEpisode": {
+                "id": "ReviewepisodeEpisode"
+              },
+              "CharacterfriendsConnectionFriendsConnection": {
+                "id": "CharacterfriendsConnectionFriendsConnection"
+              },
+              "CharacterappearsInEpisode": {
+                "id": "CharacterappearsInEpisode"
+              },
+              "CharacterImplementation 1Human": {
+                "id": "CharacterImplementation 1Human"
+              },
+              "CharacterImplementation 2Droid": {
+                "id": "CharacterImplementation 2Droid"
+              },
+              "SearchResultType 1Human": {
+                "id": "SearchResultType 1Human"
+              },
+              "SearchResultType 2Droid": {
+                "id": "SearchResultType 2Droid"
+              },
+              "SearchResultType 3Starship": {
+                "id": "SearchResultType 3Starship"
+              },
+              "QUERY - heroheroCharacter": {
+                "id": "QUERY - heroheroCharacter"
+              },
+              "QUERY - reviewsreviewsReview": {
+                "id": "QUERY - reviewsreviewsReview"
+              },
+              "QUERY - searchsearchSearchResult": {
+                "id": "QUERY - searchsearchSearchResult"
+              },
+              "QUERY - charactercharacterCharacter": {
+                "id": "QUERY - charactercharacterCharacter"
+              },
+              "QUERY - droiddroidDroid": {
+                "id": "QUERY - droiddroidDroid"
+              },
+              "QUERY - humanhumanHuman": {
+                "id": "QUERY - humanhumanHuman"
+              },
+              "QUERY - starshipstarshipStarship": {
+                "id": "QUERY - starshipstarshipStarship"
+              },
+              "MUTATION - createReviewcreateReviewReview": {
+                "id": "MUTATION - createReviewcreateReviewReview"
+              }
+            },
+            "name": "Everything",
+            "category": "demo"
+          },
+          "Movies": {
+            "domainKey": "CHARACTERS-MOVIES-SEARCH-TRANSPORTATION",
+            "currentZoom": {
+              "k": 2.9876577549052277,
+              "x": -5889.279809747342,
+              "y": -6550.918098793465
+            },
+            "nodes": {
+              "Review": {
+                "id": "Review",
+                "posX": 2609.762064953643,
+                "posY": 3297.9844152082537,
+                "open": true
+              },
+              "QUERY - reviews": {
+                "id": "QUERY - reviews",
+                "posX": 2362.773696575945,
+                "posY": 3153.3947026408773,
+                "open": false
+              },
+              "MUTATION - createReview": {
+                "id": "MUTATION - createReview",
+                "posX": 2284.5212776552667,
+                "posY": 3375.51512778637,
+                "open": false
+              },
+              "Episode": {
+                "id": "Episode",
+                "posX": 2863.4240842728295,
+                "posY": 3307.6457794311873,
+                "open": true
+              },
+              "DomainCharacters": {
+                "id": "DomainCharacters",
+                "posX": 3219.4517884114375,
+                "posY": 3131.360976434701
+              },
+              "DomainTransportation": {
+                "id": "DomainTransportation",
+                "posX": 3790.558138943991,
+                "posY": 3607.090654945656
+              },
+              "DomainSearch": {
+                "id": "DomainSearch",
+                "posX": 4068.0467767022537,
+                "posY": 2979.8167835321365
+              }
+            },
+            "edges": {
+              "DomainCharactersappearsInEpisode": {
+                "id": "DomainCharactersappearsInEpisode"
+              },
+              "DomainCharactersstarshipsDomainTransportation": {
+                "id": "DomainCharactersstarshipsDomainTransportation"
+              },
+              "ReviewepisodeEpisode": {
+                "id": "ReviewepisodeEpisode"
+              },
+              "DomainSearchType 1DomainCharacters": {
+                "id": "DomainSearchType 1DomainCharacters"
+              },
+              "DomainSearchType 3DomainTransportation": {
+                "id": "DomainSearchType 3DomainTransportation"
+              },
+              "QUERY - reviewsreviewsReview": {
+                "id": "QUERY - reviewsreviewsReview"
+              },
+              "MUTATION - createReviewcreateReviewReview": {
+                "id": "MUTATION - createReviewcreateReviewReview"
+              }
+            },
+            "name": "Movies",
+            "category": "demo"
+          },
+          "Characters": {
+            "domainKey": "CHARACTERS-MOVIES-SEARCH-TRANSPORTATION",
+            "currentZoom": {
+              "k": 2.8697407484930846,
+              "x": -4664.639246871801,
+              "y": -4468.893484603837
+            },
+            "nodes": {
+              "Human": {
+                "id": "Human",
+                "posX": 2765.455740597842,
+                "posY": 2557.3078297354095,
+                "open": true
+              },
+              "Droid": {
+                "id": "Droid",
+                "posX": 3387.426097709018,
+                "posY": 3242.3991544233563,
+                "open": true
+              },
+              "Character": {
+                "id": "Character",
+                "posX": 3097.662665405775,
+                "posY": 2933.355553174502,
+                "open": true
+              },
+              "QUERY - hero": {
+                "id": "QUERY - hero",
+                "posX": 3551.2085876129863,
+                "posY": 2846.4600820457363,
+                "open": true
+              },
+              "QUERY - character": {
+                "id": "QUERY - character",
+                "posX": 2621.28633834145,
+                "posY": 2828.031134626498,
+                "open": true
+              },
+              "QUERY - droid": {
+                "id": "QUERY - droid",
+                "posX": 3797.585141124417,
+                "posY": 3119.591201325639,
+                "open": true
+              },
+              "QUERY - human": {
+                "id": "QUERY - human",
+                "posX": 3210.3078888270165,
+                "posY": 2330.3961283475023,
+                "open": true
+              },
+              "DomainMovies": {
+                "id": "DomainMovies",
+                "posX": 3647.6697285601026,
+                "posY": 2482.6957187791318,
+                "open": true
+              },
+              "DomainTransportation": {
+                "id": "DomainTransportation",
+                "posX": 2458.218783475241,
+                "posY": 2036.9595514300308,
+                "open": false
+              },
+              "DomainSearch": {
+                "id": "DomainSearch",
+                "posX": 2002.0066155694412,
+                "posY": 2816.3873401727615,
+                "open": false
+              }
+            },
+            "edges": {
+              "HumanfriendsCharacter": {
+                "id": "HumanfriendsCharacter"
+              },
+              "HumanappearsInDomainMovies": {
+                "id": "HumanappearsInDomainMovies"
+              },
+              "HumanstarshipsDomainTransportation": {
+                "id": "HumanstarshipsDomainTransportation"
+              },
+              "DroidfriendsCharacter": {
+                "id": "DroidfriendsCharacter"
+              },
+              "DroidappearsInDomainMovies": {
+                "id": "DroidappearsInDomainMovies"
+              },
+              "CharacterappearsInDomainMovies": {
+                "id": "CharacterappearsInDomainMovies"
+              },
+              "CharacterImplementation 1Human": {
+                "id": "CharacterImplementation 1Human"
+              },
+              "CharacterImplementation 2Droid": {
+                "id": "CharacterImplementation 2Droid"
+              },
+              "DomainSearchType 1Human": {
+                "id": "DomainSearchType 1Human"
+              },
+              "DomainSearchType 2Droid": {
+                "id": "DomainSearchType 2Droid"
+              },
+              "DomainSearchType 3DomainTransportation": {
+                "id": "DomainSearchType 3DomainTransportation"
+              },
+              "QUERY - heroheroCharacter": {
+                "id": "QUERY - heroheroCharacter"
+              },
+              "QUERY - charactercharacterCharacter": {
+                "id": "QUERY - charactercharacterCharacter"
+              },
+              "QUERY - droiddroidDroid": {
+                "id": "QUERY - droiddroidDroid"
+              },
+              "QUERY - humanhumanHuman": {
+                "id": "QUERY - humanhumanHuman"
+              }
+            },
+            "name": "Characters",
+            "category": "demo"
+          },
+          "Transportation": {
+            "domainKey": "CHARACTERS-MOVIES-SEARCH-TRANSPORTATION",
+            "currentZoom": {
+              "k": 3.211678845817989,
+              "x": -9391.339455000078,
+              "y": -7662.044121850262
+            },
+            "nodes": {
+              "Starship": {
+                "id": "Starship",
+                "posX": 4740.283659256847,
+                "posY": 3607.245499564486,
+                "open": true
+              },
+              "QUERY - starship": {
+                "id": "QUERY - starship",
+                "posX": 5103.172447242269,
+                "posY": 3511.0067752822865,
+                "open": true
+              },
+              "DomainCharacters": {
+                "id": "DomainCharacters",
+                "posX": 3849.7607064038184,
+                "posY": 3353.7657501840126
+              },
+              "DomainMovies": {
+                "id": "DomainMovies",
+                "posX": 3127.7890671994087,
+                "posY": 3498.0816259471576
+              },
+              "DomainSearch": {
+                "id": "DomainSearch",
+                "posX": 4667.358574176861,
+                "posY": 3043.879781737998
+              }
+            },
+            "edges": {
+              "DomainCharactersappearsInDomainMovies": {
+                "id": "DomainCharactersappearsInDomainMovies"
+              },
+              "DomainCharactersstarshipsStarship": {
+                "id": "DomainCharactersstarshipsStarship"
+              },
+              "DomainSearchType 1DomainCharacters": {
+                "id": "DomainSearchType 1DomainCharacters"
+              },
+              "DomainSearchType 3Starship": {
+                "id": "DomainSearchType 3Starship"
+              },
+              "QUERY - starshipstarshipStarship": {
+                "id": "QUERY - starshipstarshipStarship"
+              }
+            },
+            "name": "Transportation",
+            "category": "demo"
+          },
+          "Search": {
+            "domainKey": "CHARACTERS-SEARCH-TRANSPORTATION",
+            "currentZoom": {
+              "k": 4.138900111321763,
+              "x": -13591.625603367753,
+              "y": -9168.512140853549
+            },
+            "nodes": {
+              "Human": {
+                "id": "Human",
+                "posX": 3833.35050969137,
+                "posY": 2826.9245078770878,
+                "open": true
+              },
+              "Droid": {
+                "id": "Droid",
+                "posX": 3814.692196047148,
+                "posY": 3310.2153633394933,
+                "open": true
+              },
+              "Starship": {
+                "id": "Starship",
+                "posX": 4386.5967755152515,
+                "posY": 3266.24022059996,
+                "open": true
+              },
+              "Character": {
+                "id": "Character",
+                "posX": 3514.694945062633,
+                "posY": 3069.620548636524,
+                "open": true
+              },
+              "SearchResult": {
+                "id": "SearchResult",
+                "posX": 4602.114995225751,
+                "posY": 3055.7137699504306,
+                "open": true
+              },
+              "QUERY - search": {
+                "id": "QUERY - search",
+                "posX": 4947.266847530187,
+                "posY": 2838.725180536438,
+                "open": true
+              }
+            },
+            "edges": {
+              "HumanfriendsCharacter": {
+                "id": "HumanfriendsCharacter"
+              },
+              "DroidfriendsCharacter": {
+                "id": "DroidfriendsCharacter"
+              },
+              "CharacterImplementation 1Human": {
+                "id": "CharacterImplementation 1Human"
+              },
+              "CharacterImplementation 2Droid": {
+                "id": "CharacterImplementation 2Droid"
+              },
+              "SearchResultType 1Human": {
+                "id": "SearchResultType 1Human"
+              },
+              "SearchResultType 2Droid": {
+                "id": "SearchResultType 2Droid"
+              },
+              "SearchResultType 3Starship": {
+                "id": "SearchResultType 3Starship"
+              },
+              "QUERY - searchsearchSearchResult": {
+                "id": "QUERY - searchsearchSearchResult"
+              }
+            },
+            "name": "Search",
+            "category": "demo"
+          }
+        },
+        "GRENADE": {
+          "domainKey": "CHARACTERS-MOVIES-SEARCH-TRANSPORTATION",
+          "currentZoom": {
+            "k": 2.8020437705383454,
+            "x": -8041.743466674687,
+            "y": -6120.802684035092
+          },
+          "nodes": {
+            "Human": {
+              "id": "Human",
+              "posX": 4879.736258175967,
+              "posY": 3097.2995289541595,
+              "open": true
+            },
+            "Droid": {
+              "id": "Droid",
+              "posX": 4876.826244193393,
+              "posY": 3657.9186856733563,
+              "open": true
+            },
+            "FriendsConnection": {
+              "id": "FriendsConnection",
+              "posX": 4208.726264976902,
+              "posY": 3848.904672382679,
+              "open": true
+            },
+            "FriendsEdge": {
+              "id": "FriendsEdge",
+              "posX": 3795.8178064054578,
+              "posY": 3890.598626163615,
+              "open": true
+            },
+            "PageInfo": {
+              "id": "PageInfo",
+              "posX": 4481.594245516771,
+              "posY": 4138.143887997992,
+              "open": true
+            },
+            "Review": {
+              "id": "Review",
+              "posX": 3652.0374410730906,
+              "posY": 3109.1645650699006,
+              "open": true
+            },
+            "Starship": {
+              "id": "Starship",
+              "posX": 4492.107087262576,
+              "posY": 2803.904838465293,
+              "open": true
+            },
+            "Character": {
+              "id": "Character",
+              "posX": 3606.1821084286075,
+              "posY": 3575.637133379876,
+              "open": true
+            },
+            "SearchResult": {
+              "id": "SearchResult",
+              "posX": 4140.793941373828,
+              "posY": 2933.191333353161,
+              "open": true
+            },
+            "QUERY - hero": {
+              "id": "QUERY - hero",
+              "posX": 3137.805404823101,
+              "posY": 3614.814841956011,
+              "open": true
+            },
+            "QUERY - reviews": {
+              "id": "QUERY - reviews",
+              "posX": 3174.482543227607,
+              "posY": 3045.2867658862083,
+              "open": true
+            },
+            "QUERY - search": {
+              "id": "QUERY - search",
+              "posX": 3575.8295105021143,
+              "posY": 2757.9575540159854,
+              "open": true
+            },
+            "QUERY - character": {
+              "id": "QUERY - character",
+              "posX": 3151.417062930411,
+              "posY": 3477.4824585906,
+              "open": true
+            },
+            "QUERY - droid": {
+              "id": "QUERY - droid",
+              "posX": 5383.950394473712,
+              "posY": 3518.4479744748023,
+              "open": true
+            },
+            "QUERY - human": {
+              "id": "QUERY - human",
+              "posX": 5246.97821539493,
+              "posY": 2853.7383616447705,
+              "open": true
+            },
+            "QUERY - starship": {
+              "id": "QUERY - starship",
+              "posX": 4134.461044024741,
+              "posY": 2622.508682002906,
+              "open": true
+            },
+            "MUTATION - createReview": {
+              "id": "MUTATION - createReview",
+              "posX": 3221.7412643847733,
+              "posY": 3241.003745585091,
+              "open": true
+            },
+            "Episode": {
+              "id": "Episode",
+              "posX": 4021.8519396612755,
+              "posY": 3169.8018185797,
+              "open": true
+            }
+          },
+          "edges": {
+            "HumanfriendsCharacter": {
+              "id": "HumanfriendsCharacter"
+            },
+            "HumanfriendsConnectionFriendsConnection": {
+              "id": "HumanfriendsConnectionFriendsConnection"
+            },
+            "HumanappearsInEpisode": {
+              "id": "HumanappearsInEpisode"
+            },
+            "HumanstarshipsStarship": {
+              "id": "HumanstarshipsStarship"
+            },
+            "DroidfriendsCharacter": {
+              "id": "DroidfriendsCharacter"
+            },
+            "DroidfriendsConnectionFriendsConnection": {
+              "id": "DroidfriendsConnectionFriendsConnection"
+            },
+            "DroidappearsInEpisode": {
+              "id": "DroidappearsInEpisode"
+            },
+            "FriendsConnectionedgesFriendsEdge": {
+              "id": "FriendsConnectionedgesFriendsEdge"
+            },
+            "FriendsConnectionfriendsCharacter": {
+              "id": "FriendsConnectionfriendsCharacter"
+            },
+            "FriendsConnectionpageInfoPageInfo": {
+              "id": "FriendsConnectionpageInfoPageInfo"
+            },
+            "FriendsEdgenodeCharacter": {
+              "id": "FriendsEdgenodeCharacter"
+            },
+            "ReviewepisodeEpisode": {
+              "id": "ReviewepisodeEpisode"
+            },
+            "CharacterfriendsConnectionFriendsConnection": {
+              "id": "CharacterfriendsConnectionFriendsConnection"
+            },
+            "CharacterappearsInEpisode": {
+              "id": "CharacterappearsInEpisode"
+            },
+            "CharacterImplementation 1Human": {
+              "id": "CharacterImplementation 1Human"
+            },
+            "CharacterImplementation 2Droid": {
+              "id": "CharacterImplementation 2Droid"
+            },
+            "SearchResultType 1Human": {
+              "id": "SearchResultType 1Human"
+            },
+            "SearchResultType 2Droid": {
+              "id": "SearchResultType 2Droid"
+            },
+            "SearchResultType 3Starship": {
+              "id": "SearchResultType 3Starship"
+            },
+            "QUERY - heroheroCharacter": {
+              "id": "QUERY - heroheroCharacter"
+            },
+            "QUERY - reviewsreviewsReview": {
+              "id": "QUERY - reviewsreviewsReview"
+            },
+            "QUERY - searchsearchSearchResult": {
+              "id": "QUERY - searchsearchSearchResult"
+            },
+            "QUERY - charactercharacterCharacter": {
+              "id": "QUERY - charactercharacterCharacter"
+            },
+            "QUERY - droiddroidDroid": {
+              "id": "QUERY - droiddroidDroid"
+            },
+            "QUERY - humanhumanHuman": {
+              "id": "QUERY - humanhumanHuman"
+            },
+            "QUERY - starshipstarshipStarship": {
+              "id": "QUERY - starshipstarshipStarship"
+            },
+            "MUTATION - createReviewcreateReviewReview": {
+              "id": "MUTATION - createReviewcreateReviewReview"
+            }
+          },
+          "name": "ALL",
+          "description": "Override Grenade",
+          "category": "DVIEW",
+          "override": true
+        }
+      }
+    },
+    "mappings": "Human: Characters\nPageInfo: Characters\nCharacter: Characters\nDroid: Characters\nFriendsConnection: Characters\nFriendsEdge: Characters\nReview: Movies\nStarship: Transportation\nSearchResult: Search\nEpisode: Movies",
+    "_mappings": {
+      "Human": "Characters",
+      "PageInfo": "Characters",
+      "Character": "Characters",
+      "Droid": "Characters",
+      "FriendsConnection": "Characters",
+      "FriendsEdge": "Characters",
+      "Review": "Movies",
+      "Starship": "Transportation",
+      "SearchResult": "Search",
+      "Episode": "Movies"
+    }
+  }
+}
