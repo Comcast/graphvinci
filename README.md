@@ -19,11 +19,8 @@ Create and save custom, shareable schema views that promote cross-developer data
 
 ## How can I run GraphVinci?
 
-GraphVinci is built as static content with minimal dependencies and uses parcel to bundle.  To test it out, just "npm install" to add the dependencies, and "npm start" and parcel will host the visualizer locally.  The output from "npm build" can be served as static content in any manner that you choose.
+GraphVinci is built as static content with minimal dependencies and uses parcel to bundle.  To test it out, just "npm install" to add the dependencies, and "npm start" and parcel will host the visualizer locally.  The output from "npm build" can be served as static content in any manner that you choose.  Additional options (npm, docker images etc) will be created as the project matures
 
-## Endpoint Setup
-
-![image](https://github.comcast.com/storage/user/581/files/2f546400-ed92-11eb-996a-f824b0cdaa2f)
 
 ## FAQ
 
