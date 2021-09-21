@@ -17,7 +17,7 @@
     "visualizer"
   ],
   "author": "Dave Beaumont",
-  "license": "ISC",
+  "license": "Apache2",
   "dependencies": {
     "d3": "^5.16.0",
     "graphql": "^15.5.1",
