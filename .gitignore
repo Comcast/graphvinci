@@ -38,3 +38,5 @@ static/
 .parcel-cache/
 
 .DS_Store
+
+repolinter.json

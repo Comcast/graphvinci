@@ -1,3 +1,6 @@
+## License
+graphvinci is licensed under [Apache License 2.0](/LICENSE). Valid-License-Identifier: Apache-2.0
+
 ![image](https://user-images.githubusercontent.com/8096993/134034741-2f699803-ae8a-4b98-bd9b-ac972e04784e.png)
 
 A better schema visualizer for GraphQL APIs - view your schema in a draggable, zoomable and collapsible way.  Built to introspect large interconnected schemas, to promote a better understanding of your data
