@@ -39,10 +39,6 @@ Yes.  If a field in a type is "logically" owned by a separate group (as is the c
 
 Technically this *might* be possible, but the challenges in making this "work" effectively mean that this feature is unlikely to come soon
 
-#### Is introspection the only method of importing a schema?
-
-Currently yes, but we will be adding sdl interpretation (and direct edit) shortly
-
 #### Any plans for a GraphQL browser with visualization options?
 
 Yes.  We just decided to release the schema visualization to the community first
