@@ -15,6 +15,7 @@
  */
 
 import Visualizer from "../Visualizer";
+import d3utils from "../utils/D3Utils";
 
 export default class VisManager {
     constructor(node) {
@@ -28,7 +29,7 @@ export default class VisManager {
     getCandidates(selection) {
         let candidates = [];
         selection.each(function () {
-            candidates.push(Visualizer.d3utils.get_circle_XY(this));
+            candidates.push(d3utils.get_circle_XY(this));
         });
         return candidates;
     }

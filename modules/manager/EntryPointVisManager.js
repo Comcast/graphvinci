@@ -16,8 +16,9 @@
 
 import ClassNodeSizer from './ClassNodeSizer.js';
 import * as d3 from "d3";
-import Visualizer from '../Visualizer.js';
 import VisManager from './VisManager.js';
+import d3utils from "../utils/D3Utils";
+import Visualizer from "../Visualizer";
 
 export default class EntryPointVisManager extends VisManager {
     constructor(node) {
@@ -56,7 +57,7 @@ export default class EntryPointVisManager extends VisManager {
             .attr('class', "subdermis")
             .attr('width', this.initialSizer.rowWidth)
             .attr('height', 0)
-            .attr('fill', Visualizer.d3utils.get_node_color(this.node));
+            .attr('fill', d3utils.get_node_color(this.node));
 
         // Remove and re-create the incoming attachment points
         this._append_incoming_group(master);
@@ -71,7 +72,7 @@ export default class EntryPointVisManager extends VisManager {
             .attr('class', "epidermis")
             .attr('width', this.initialSizer.rowWidth)
             .attr('height', this.initialSizer.tableHeight)
-            .attr('stroke', Visualizer.d3utils.get_node_color(this.node))
+            .attr('stroke', d3utils.get_node_color(this.node))
             .attr('stroke-width', 4)
             .attr('rx', 4)
             .attr('fill', "none");
@@ -97,7 +98,7 @@ export default class EntryPointVisManager extends VisManager {
                 .attr('height', this.sizing.xHeight)
                 .attr('rx', 4)
                 .attr('fill', "#fff")
-                .attr('stroke', Visualizer.d3utils.get_node_color(this.node))
+                .attr('stroke', d3utils.get_node_color(this.node))
                 .attr('stroke-width', 4);
             remButton.append('text')
                 .text('X')
@@ -263,7 +264,7 @@ export default class EntryPointVisManager extends VisManager {
             .append('rect')
             .attr("width", this.initialSizer.rowWidth)
             .attr("height", this.initialSizer.rowHeight)
-            .attr('fill', d => Visualizer.d3utils.get_node_color(this.node))
+            .attr('fill', d => d3utils.get_node_color(this.node))
             .attr('rx', 3);
 
         rowGroup.append('rect')
@@ -401,21 +402,21 @@ export default class EntryPointVisManager extends VisManager {
                 return d3.select(this.parentNode).attr('filterName') === fieldName;
             });
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(destination, candidates);
+        return d3utils.get_closest_point(destination, candidates);
     }
 
     getIncomingConnectionPoint(source) {
         let selector = d3.select(this.group)
             .selectAll('.incomingSelector');
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(source, candidates);
+        return d3utils.get_closest_point(source, candidates);
     }
 
     getEntityConnectionPoint(source) {
         let selector = d3.select(this.group)
             .selectAll('.entitySelector');
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(source, candidates);
+        return d3utils.get_closest_point(source, candidates);
     }
 
 }

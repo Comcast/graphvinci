@@ -16,7 +16,7 @@
 
 import ClassNodeSizer from './ClassNodeSizer.js';
 import * as d3 from "d3";
-import Visualizer from "../Visualizer";
+import D3Utils from "../utils/D3Utils";
 
 export default class InputObjectVisManager {
     constructor(node) {
@@ -43,7 +43,7 @@ export default class InputObjectVisManager {
             .attr('class', "subdermis")
             .attr('width', this.sizing.rowWidth)
             .attr('height', this.sizing.tableHeight)
-            .attr('fill', Visualizer.d3utils.get_color(this.node.domain));
+            .attr('fill', d3utils.get_color(this.node.domain));
 
         // Remove and re-create the incoming attachment points
         this._append_incoming_group(master);
@@ -57,7 +57,7 @@ export default class InputObjectVisManager {
             .attr('class', "epidermis")
             .attr('width', this.sizing.rowWidth)
             .attr('height', this.sizing.tableHeight)
-            .attr('stroke', Visualizer.d3utils.get_node_color(this.node))
+            .attr('stroke', d3utils.get_node_color(this.node))
             .attr('stroke-width', 4)
             .attr('rx', 4)
             .attr('fill', "none");
@@ -210,27 +210,27 @@ export default class InputObjectVisManager {
                 return d3.select(this.parentNode).attr('filterName') === fieldName;
             });
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(destination, candidates);
+        return d3utils.get_closest_point(destination, candidates);
     }
 
     getIncomingConnectionPoint(source) {
         let selector = d3.select(this.group)
             .selectAll('.incomingSelector');
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(source, candidates);
+        return d3utils.get_closest_point(source, candidates);
     }
 
     getEntityConnectionPoint(source) {
         let selector = d3.select(this.group)
             .selectAll('.entitySelector');
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(source, candidates);
+        return d3utils.get_closest_point(source, candidates);
     }
 
     getCandidates(selection) {
         let candidates = [];
         selection.each(function () {
-            candidates.push(Visualizer.d3utils.get_circle_XY(this));
+            candidates.push(d3utils.get_circle_XY(this));
         });
         return candidates;
     }

@@ -17,7 +17,7 @@
 import DomainNodeSizer from './DomainNodeSizer.js';
 import * as d3 from "d3";
 import VisManager from './VisManager.js';
-import Visualizer from "../Visualizer";
+import d3utils from "../utils/D3Utils";
 
 const bigClass = "domainheader";
 
@@ -55,7 +55,7 @@ export default class DomainVisManager extends VisManager {
             .attr('width', this.sizing.width)
             .attr('height', this.sizing.height)
             .attr('rx', 40)
-            .attr('fill', Visualizer.d3utils.get_color(this.node.domain));
+            .attr('fill', d3utils.get_color(this.node.domain));
 
         // Add the mask
         master.selectAll('.mask')
@@ -93,7 +93,7 @@ export default class DomainVisManager extends VisManager {
             .attr('class', "epidermis")
             .attr('width', this.sizing.width)
             .attr('height', this.sizing.height)
-            .attr('stroke', Visualizer.d3utils.get_color(this.node.domain))
+            .attr('stroke', d3utils.get_color(this.node.domain))
             .attr('stroke-width', 25)
             .attr('rx', 40)
             .attr('fill', "none");
@@ -133,14 +133,14 @@ export default class DomainVisManager extends VisManager {
         let selector = d3.select(this.group)
             .selectAll('.incomingSelector');
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(source, candidates);
+        return d3utils.get_closest_point(source, candidates);
     }
 
     getEntityConnectionPoint(source) {
         let selector = d3.select(this.group)
             .selectAll('.entitySelector');
         let candidates = this.getCandidates(selector);
-        return Visualizer.d3utils.get_closest_point(source, candidates);
+        return d3utils.get_closest_point(source, candidates);
     }
 
 }

@@ -21,7 +21,6 @@ import DomainState from "./config/DomainState.js";
 import Schema from "./schema/Schema.js";
 import ProxyManager from "./requests/ProxyManager";
 import ConciergePush from "./concierge/ConciergePush";
-import D3Utils from "./utils/D3Utils";
 import Concierge from "./concierge/Concierge";
 import DomainMetaManager from "./config/DomainMetaManager";
 import D3TextSizer from "./utils/D3TextSizer";
@@ -48,7 +47,6 @@ class Visualizer {
         this.controller = new AbortController();
         this.concierge_push = new ConciergePush();
         this.proxy_manager = new ProxyManager();
-        this.d3utils = new D3Utils();
         this.concierge = new Concierge();
         this.domain_meta_manager = new DomainMetaManager();
         this.d3text_sizer = new D3TextSizer();

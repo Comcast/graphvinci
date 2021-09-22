@@ -15,8 +15,8 @@
  */
 
 import Visualizer from "../Visualizer";
-
 export const noDomain = "Uncategorized";
+
 export default class DomainMetaManager {
     constructor() {
         this.domainPatternMatch = Visualizer.config.domainMatch || /GV\((.*?)\s*,\s*(.*?)\)/;

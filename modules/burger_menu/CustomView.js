@@ -18,10 +18,7 @@ import StackableElement from "./StackableElement.js";
 import {CONTRASTCOLOR, MENURIGHT, BORDER, DURATION} from "./VerticalMenu";
 import Visualizer from "../Visualizer";
 import * as d3 from "d3";
-import {DEFAULTHEIGHT, DEFAULTWIDTH} from "../menu/HMenu";
-import D3Utils from "../utils/D3Utils";
-
-const MINIBORDER = 2
+import d3utils from "../utils/D3Utils";
 
 export default class CustomView extends StackableElement {
     constructor(width, height, type, category, name) {
@@ -86,7 +83,7 @@ export default class CustomView extends StackableElement {
             Visualizer.graph.verticalMenu.update_state();
         })
         this.add_minimenu_button(group, "Copy to clipboard", this.miniMenuWidth * 3, "images/buttons/export.png", "#f5f5f5", "#acacac", function (d) {
-            Visualizer.d3utils.copyTextToClipboard(btoa(JSON.stringify(Visualizer.graph.posData(), null, 2)))
+            d3utils.copyTextToClipboard(btoa(JSON.stringify(Visualizer.graph.posData(), null, 2)))
         })
 
         let mask = group.append('g')

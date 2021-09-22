@@ -17,7 +17,7 @@
 import * as d3 from "d3";
 import ColorMapper from "./ColorMapper.js";
 
-export default class D3Utils {
+class D3Utils {
     constructor() {
         this.color = d3.scaleOrdinal(d3.schemeSet3);
         this.altColor = d3.scaleOrdinal(d3.interpolateSpectral)
@@ -112,3 +112,5 @@ export default class D3Utils {
         }
     }
 }
+
+export default new D3Utils();

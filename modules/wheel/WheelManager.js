@@ -19,6 +19,7 @@ import Visualizer from "../Visualizer";
 import SchemaDomain from "../schema/SchemaDomain";
 import {states} from "../config/DomainState";
 import {BORDER} from "../burger_menu/VerticalMenu";
+import d3utils from '../utils/D3Utils.js';
 
 export default class WheelManager {
     constructor() {
@@ -189,7 +190,7 @@ export default class WheelManager {
             .style('stroke', 'white')
             .style('stroke-width', '2px')
             .style('opacity', 0.7)
-            .attr('fill', d => (d.data.color) ? d.data.color : Visualizer.d3utils.get_color(d.data.name))
+            .attr('fill', d => (d.data.color) ? d.data.color : d3utils.get_color(d.data.name))
 
         this.allPies.append('text')
             .each(function (d) {
