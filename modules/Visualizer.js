@@ -23,12 +23,11 @@ import Schema from "./schema/Schema.js";
 import ProxyManager from "./requests/ProxyManager";
 import ConciergePush from "./concierge/ConciergePush";
 import Concierge from "./concierge/Concierge";
-import DomainMetaManager from "./config/DomainMetaManager";
 import D3TextSizer from "./utils/D3TextSizer";
 import InputDisplay from "./input/InputDisplay";
 import './styles/app.css';
 import SchemaConfigManager from "./config/SchemaConfigManager";
-import { states } from "./VisStates";
+import { states } from "./Constants";
 
 class Visualizer {
 
@@ -45,7 +44,6 @@ class Visualizer {
         this.concierge_push = new ConciergePush();
         this.proxy_manager = new ProxyManager();
         this.concierge = new Concierge();
-        this.domain_meta_manager = new DomainMetaManager();
         this.d3text_sizer = new D3TextSizer();
         this.graph = new Graph();
         this.input_display = new InputDisplay();

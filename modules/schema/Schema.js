@@ -19,9 +19,9 @@ import SchemaInput from './SchemaInput.js';
 import SchemaDomain from './SchemaDomain.js';
 import {states} from '../config/DomainState.js';
 import SchemaEntryPoint from "./SchemaEntryPoint";
-import { noDomain as noDomain} from "../config/DomainMetaManager"
+import { noDomain } from '../Constants'
 import SchemaField from "./SchemaField";
-import GlobalViz from '../GlobalViz';
+import domainMetaManager from '../config/DomainMetaManager';
 import SchemaEnumNode from "./SchemaEnumNode";
 
 const SCHEMANAME = "__schema";
@@ -386,7 +386,7 @@ export default class Schema {
         if (nodeObj.name.toUpperCase() === "QUERY" || nodeObj.name.toUpperCase() === "MUTATION" || nodeObj.name.toUpperCase() === "SUBSCRIPTION") {
             return;
         }
-        let domainInfo = GlobalViz.vis.domain_meta_manager.parse_node_metadata(nodeObj);
+        let domainInfo = domainMetaManager.parse_node_metadata(nodeObj);
         this._nodes.set(nodeObj.name, new SchemaNode(nodeObj, this._enums, this._input, "Entity", domainInfo));
     }
 
@@ -394,7 +394,7 @@ export default class Schema {
         if (!("kind" in nodeObj) ||!(nodeObj.kind === "INTERFACE")) return;
         if (!("name" in nodeObj)) return;
         if (this.skipInternals && nodeObj.name.startsWith("__")) return;
-        let domainInfo = GlobalViz.vis.domain_meta_manager.parse_node_metadata(nodeObj);
+        let domainInfo = domainMetaManager.parse_node_metadata(nodeObj);
         this._nodes.set(nodeObj.name, new SchemaNode(nodeObj, this._enums, this._input, "Entity", domainInfo));
     }
 
@@ -402,7 +402,7 @@ export default class Schema {
         if (!("kind" in nodeObj) ||!(nodeObj.kind === "UNION")) return;
         if (!("name" in nodeObj)) return;
         if (this.skipInternals && nodeObj.name.startsWith("__")) return;
-        let domainInfo = GlobalViz.vis.domain_meta_manager.parse_node_metadata(nodeObj);
+        let domainInfo = domainMetaManager.parse_node_metadata(nodeObj);
         this._nodes.set(nodeObj.name, new SchemaNode(nodeObj, this._enums, this._input, "Entity", domainInfo));
     }
 
@@ -457,7 +457,7 @@ export default class Schema {
         if (!("enumValues" in enumObj) ||!(Array.isArray(enumObj.enumValues))) return;
         if (this.skipInternals && enumObj.name.startsWith("__")) return;
         if (! this._enumDefaultDomain.get(enumObj.name)) return;
-        let domainInfo = GlobalViz.vis.domain_meta_manager.parse_node_metadata(enumObj, this._enumDefaultDomain.get(enumObj.name));
+        let domainInfo = domainMetaManager.parse_node_metadata(enumObj, this._enumDefaultDomain.get(enumObj.name));
         this._nodes.set(enumObj.name, new SchemaEnumNode(enumObj, domainInfo));
     }
 

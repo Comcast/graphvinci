@@ -15,9 +15,9 @@
  */
 
 import GlobalViz from '../GlobalViz';
-export const noDomain = "Uncategorized";
+import noDomain from '../Constants'
 
-export default class DomainMetaManager {
+class DomainMetaManager {
     constructor() {
         this.domainPatternMatch = GlobalViz.vis?.config.domainMatch || /GV\((.*?)\s*,\s*(.*?)\)/;
         this.multiMatch = new RegExp(this.domainPatternMatch.source, this.domainPatternMatch.flags + "g");
@@ -94,3 +94,5 @@ export default class DomainMetaManager {
     }
 
 }
+
+export default new DomainMetaManager();

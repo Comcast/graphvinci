@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import noDomain from '../config/DomainMetaManager'
+import { noDomain } from '../Constants'
 
 export default class DomainAwareEntity {
     constructor(domainInfo) {

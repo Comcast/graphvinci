@@ -21,17 +21,19 @@ const bigClass = "domainheader";
 export default class DomainNodeSizer {
 
     constructor(domain) {
+        this.sized = false;
         this.rows = 0;
         this.height =  5;
         this.width = 10;
         this.marginX = 100;
         this.marginY = 100;
         this.spacer = 25;
-        this._get_sizing(domain);
+        this.domain = domain;
     }
 
-    _get_sizing(domain) {
-        let nameDetail = GlobalViz.vis?.d3text_sizer.get_sizing(domain, bigClass);
+    _get_sizing() {
+        this.sized = true;
+        let nameDetail = GlobalViz.vis?.d3text_sizer.get_sizing(this.domain, bigClass);
         let paddedWidth = nameDetail.width + this.marginX;
         let paddedHeight = nameDetail.height + this.marginY;
         this.height = paddedHeight > this.height ? paddedHeight : this.height;
@@ -39,14 +41,17 @@ export default class DomainNodeSizer {
     }
 
     get centerTextAnchorX() {
+        if (! this.sized) this._get_sizing();
         return (this.width / 2);
     }
 
     get rowMidPoint() {
+        if (! this.sized) this._get_sizing();
         return this.height / 2;
     }
 
     get targetPoints() {
+        if (! this.sized) this._get_sizing();
         let northX = this.width / 2;
         let northY = 0 - this.spacer;
         let southX = this.width / 2;
@@ -64,6 +69,7 @@ export default class DomainNodeSizer {
     }
 
     get radius() {
+        if (! this.sized) this._get_sizing();
         return this.height > this.width ? this.height / 1.8 : this.width / 1.8;
     }
 

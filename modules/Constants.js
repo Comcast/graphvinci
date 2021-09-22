@@ -3,3 +3,5 @@ export const states = {
     Editor: 1,
     Setup: 2
 };
+
+export const noDomain = "Uncategorized";

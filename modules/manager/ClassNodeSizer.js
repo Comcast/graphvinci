@@ -27,6 +27,7 @@ export default class ClassNodeSizer {
 
     constructor(fieldArray) {
         this.rows = 0;
+        this.sized = false;
         this.height =  MINHEIGHT;
         this.nameWidth = MINNAMEWIDTH;
         this.definitionWidth = MINDEFWIDTH;
@@ -34,12 +35,13 @@ export default class ClassNodeSizer {
         this.marginX = MARGINX;
         this.marginY = MARGINY;
         this.nameOffset = new Map();
-        this._get_sizing(fieldArray);
+        this.fieldArray = fieldArray;
     }
 
-    _get_sizing(fieldArray) {
+    _get_sizing() {
+        this.sized = true;
         this.hasInput = false;
-        for (let field of fieldArray) {
+        for (let field of this.fieldArray) {
             this.rows++;
             let nameDetail = GlobalViz.vis?.d3text_sizer.get_sizing(field.name);
             let definitionDetail = GlobalViz.vis?.d3text_sizer.get_sizing(field.definition);
@@ -59,66 +61,82 @@ export default class ClassNodeSizer {
     }
 
     get closerXPosition() {
+        if (! this.sized) this._get_sizing();
         return this.rowWidth - this.xWidth;
     }
 
     inputX(fieldName) {
+        if (! this.sized) this._get_sizing();
         return this.nameOffset.get(fieldName) + (this.marginX / 2);
     }
 
     get inputY() {
+        if (! this.sized) this._get_sizing();
         return this.marginY / 2
     }
 
     get inputWidth() {
+        if (! this.sized) this._get_sizing();
         return (this.hasInput) ? (this.rowHeight - this.marginY) : 0;
     }
 
     get rowWidth() {
+        if (! this.sized) this._get_sizing();
         return this.nameWidth + this.inputWidth + this.buffer + this.definitionWidth + this.marginX;
     }
 
     get rowHeight() {
+        if (! this.sized) this._get_sizing();
         return this.height + this.marginY;
     }
 
     get twixText() {
+        if (! this.sized) this._get_sizing();
         return this.marginX + this.nameWidth;
     }
 
     get leftTextAnchorX() {
+        if (! this.sized) this._get_sizing();
         return (this.marginX / 2);
     }
 
     get centerTextAnchorX() {
+        if (! this.sized) this._get_sizing();
         return (this.rowWidth / 2);
     }
 
     get rightTextAnchorX() {
+        if (! this.sized) this._get_sizing();
         return this.rowWidth - (this.marginX / 2);
     }
 
     get rowMidPoint() {
+        if (! this.sized) this._get_sizing();
         return this.rowHeight / 2;
     }
 
     get tableHeight() {
+        if (! this.sized) this._get_sizing();
         return this.rowHeight * this.rows;
     }
 
     get fullWidth() {
+        if (! this.sized) this._get_sizing();
         return this.rowWidth;
     }
 
     get fullHeight() {
+        if (! this.sized) this._get_sizing();
         return this.height + this.marginY;
     }
 
     get totalHeight() {
+        if (! this.sized) this._get_sizing();
         return this.fullHeight * this.rows;
     }
 
     get targetPoints() {
+        if (! this.sized) this._get_sizing();
         let northX = this.rowWidth / 2;
         let northY = 0 - (this.marginX / 2);
         let southX = this.rowWidth / 2;
@@ -136,6 +154,7 @@ export default class ClassNodeSizer {
     }
 
     get radius() {
+        if (! this.sized) this._get_sizing();
         return this.totalHeight > this.fullWidth ? this.totalHeight / 1.8 : this.fullWidth / 1.8;
     }
 

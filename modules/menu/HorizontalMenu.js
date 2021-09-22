@@ -19,7 +19,7 @@ import ModeButton from "./ModeButton";
 import SearchBar from "./SearchBar";
 export const DEFAULTHEIGHT = 40;
 export const DEFAULTWIDTH = 40;
-import {states} from "../VisStates"
+import {states} from "../Constants"
 import GlobalViz from "../GlobalViz";
 import HMenu, {MenuData, Separator} from "./HMenu";
 
