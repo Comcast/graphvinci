@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 import GraphVinciSchema from "./GraphVinciSchema";
 import {buildClientSchema, printSchema} from "graphql";
 import SchemaAuthorization, {NOAUTH, OAUTHCC, BEARER} from "./SchemaAuthorization";
@@ -26,7 +26,7 @@ export default class ConfigurationForm {
         this.container = (container) ? container : this.container;
         this.container.selectAll('*').remove();
 
-        let current = Visualizer.config_manager.verticalMenu.get_open_to() || Visualizer.config.get_current_schema();
+        let current = GlobalViz.vis?.config_manager.verticalMenu.get_open_to() || GlobalViz.vis?.config.get_current_schema();
         if (current == null) {
             return;
         }
@@ -227,7 +227,7 @@ export default class ConfigurationForm {
             .attr('class', "schema-form__epinput schema-form__epinput--narrow")
 
         authInput.selectAll('option')
-            .data(Visualizer.config.auth_list.concat(NOAUTH))
+            .data(GlobalViz.vis?.config.auth_list.concat(NOAUTH))
             .enter()
             .append('option')
             .attr('value', d => d)
@@ -241,8 +241,8 @@ export default class ConfigurationForm {
             .on('click', () => {
                 let authName = authInput.property("value");
                 if (authName && authName !== NOAUTH) {
-                    Visualizer.config_manager.verticalMenu.set_open_to(Visualizer.config.get_auth(authName));
-                    Visualizer.config_manager.render({})
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(GlobalViz.vis?.config.get_auth(authName));
+                    GlobalViz.vis?.config_manager.render({})
                 }
             })
             .on('mouseenter', () => {
@@ -257,11 +257,11 @@ export default class ConfigurationForm {
             .attr('class', 'schema-form__buttonimg')
             .attr('src', 'images/buttons/create.png')
             .on('click', () => {
-                let auth = Visualizer.config.add_new_blank_auth();
+                let auth = GlobalViz.vis?.config.add_new_blank_auth();
                 current.authName = auth.name;
-                Visualizer.config.save_schema(current)
-                Visualizer.config_manager.verticalMenu.set_open_to(auth)
-                Visualizer.config_manager.render({})
+                GlobalViz.vis?.config.save_schema(current)
+                GlobalViz.vis?.config_manager.verticalMenu.set_open_to(auth)
+                GlobalViz.vis?.config_manager.render({})
             })
             .on('mouseenter', () => {
                 this._apply_tooltip("Create a new authorization helper")
@@ -325,7 +325,7 @@ export default class ConfigurationForm {
                 img: "images/buttons/reset_ring.png",
                 helpText: "Reset unsaved changes to the configuration/SDL",
                 clickFunction: (d) => {
-                    Visualizer.config_manager.render({});
+                    GlobalViz.vis?.config_manager.render({});
                 }
             },
             {
@@ -336,10 +336,10 @@ export default class ConfigurationForm {
                 clickFunction: (d) => {
                     this._lock_buttons();
                     this._apply_tooltip("Introspection request is pending...")
-                    Visualizer.proxy_manager.pull_schema()
+                    GlobalViz.vis?.proxy_manager.pull_schema()
                         .then(result => {
                             let graphqlSchemaObj = buildClientSchema(result.data);
-                            Visualizer.config_manager.schemaSdl.apply(printSchema(graphqlSchemaObj))
+                            GlobalViz.vis?.config_manager.schemaSdl.apply(printSchema(graphqlSchemaObj))
                             d.errored = false;
                             this._apply_tooltip("Introspection request complete")
                             setTimeout(() => {
@@ -360,10 +360,10 @@ export default class ConfigurationForm {
                 img: "images/buttons/copy_ring.png",
                 helpText: "Clone the current schema configuration and SDL",
                 clickFunction: (d) => {
-                    let cloned = Visualizer.config.clone_schema(current);
-                    Visualizer.config.set_current_schema(cloned.name)
-                    Visualizer.config_manager.verticalMenu.set_open_to(cloned)
-                    Visualizer.config_manager.render({})
+                    let cloned = GlobalViz.vis?.config.clone_schema(current);
+                    GlobalViz.vis?.config.set_current_schema(cloned.name)
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(cloned)
+                    GlobalViz.vis?.config_manager.render({})
                 }
             },
             {
@@ -372,10 +372,10 @@ export default class ConfigurationForm {
                 helpText: "Delete the current schema",
                 clickFunction: (d) => {
                     confirm("Delete the current schema?")
-                    Visualizer.config.delete_schema(current)
-                    let newCurrent = Visualizer.config.get_current_schema()
-                    Visualizer.config_manager.verticalMenu.set_open_to(newCurrent, true)
-                    Visualizer.config_manager.render({})
+                    GlobalViz.vis?.config.delete_schema(current)
+                    let newCurrent = GlobalViz.vis?.config.get_current_schema()
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(newCurrent, true)
+                    GlobalViz.vis?.config_manager.render({})
                 }
             }
         ]
@@ -435,7 +435,7 @@ export default class ConfigurationForm {
             return;
         }
         // Get the sdl from the SDL editor
-        let sdl = Visualizer.config_manager.schemaSdl.get_sdl();
+        let sdl = GlobalViz.vis?.config_manager.schemaSdl.get_sdl();
         let oldName = current.name;
         current.name = name;
         current.url = url;
@@ -443,9 +443,9 @@ export default class ConfigurationForm {
         current.headers = headers;
         current.authName = authName;
         current.sdl = sdl;
-        Visualizer.config_manager.verticalMenu.set_open_to(current)
-        Visualizer.config_manager.update()
-        Visualizer.config.save_schema(current, oldName)
+        GlobalViz.vis?.config_manager.verticalMenu.set_open_to(current)
+        GlobalViz.vis?.config_manager.update()
+        GlobalViz.vis?.config.save_schema(current, oldName)
 
     }
 
@@ -463,9 +463,9 @@ export default class ConfigurationForm {
         current.name = name;
         current.type = BEARER;
         current.bearer = bearer;
-        Visualizer.config.save_auth(current, oldName)
-        Visualizer.config_manager.verticalMenu.set_open_to(current)
-        Visualizer.config_manager.render({});
+        GlobalViz.vis?.config.save_auth(current, oldName)
+        GlobalViz.vis?.config_manager.verticalMenu.set_open_to(current)
+        GlobalViz.vis?.config_manager.render({});
     }
 
     _save_oauth2_client_credentials(name, url, client, secret, scopes, current) {
@@ -484,8 +484,8 @@ export default class ConfigurationForm {
         current.client = client;
         current.secret = secret;
         current.scopes = scopes;
-        Visualizer.config.save_auth(current, oldName)
-        Visualizer.config_manager.verticalMenu.set_open_to(current)
-        Visualizer.config_manager.render({});
+        GlobalViz.vis?.config.save_auth(current, oldName)
+        GlobalViz.vis?.config_manager.verticalMenu.set_open_to(current)
+        GlobalViz.vis?.config_manager.render({});
     }
 }

@@ -16,9 +16,9 @@
 
 import StackableElement from "./StackableElement.js";
 import {CONTRASTCOLOR, MENURIGHT, BORDER, DURATION} from "./VerticalMenu";
-import Visualizer from "../Visualizer";
 import * as d3 from "d3";
 import d3utils from "../utils/D3Utils";
+import GlobalViz from "../GlobalViz";
 
 export default class CustomView extends StackableElement {
     constructor(width, height, type, category, name) {
@@ -46,10 +46,10 @@ export default class CustomView extends StackableElement {
         })
         let fGroup = group.append('g')
             .on('click', (d) => {
-                Visualizer.graph.re_parent();
-                let data = Visualizer.concierge.retrieve(d.name, d.category);
+                GlobalViz.vis?.graph.re_parent();
+                let data = GlobalViz.vis?.concierge.retrieve(d.name, d.category);
                 if (data) {
-                    Visualizer.graph.update_viz(data);
+                    GlobalViz.vis?.graph.update_viz(data);
                 }
             })
 
@@ -71,19 +71,19 @@ export default class CustomView extends StackableElement {
             .attr('stroke', CONTRASTCOLOR)
 
         this.add_minimenu_button(group, "Delete",this.miniMenuWidth, "images/buttons/delete.png", "#ff9393", "#ff0000",function (d) {
-            Visualizer.concierge.remove(d.name, d.category);
+            GlobalViz.vis?.concierge.remove(d.name, d.category);
             self.pruned = true;
-            Visualizer.graph.verticalMenu.update_state();
+            GlobalViz.vis?.graph.verticalMenu.update_state();
         })
         this.add_minimenu_button(group, "Save current state",this.miniMenuWidth * 2, "images/buttons/save.png", "#f5f5f5", "#acacac",function (d) {
-            let posData = Visualizer.graph.posData();
+            let posData = GlobalViz.vis?.graph.posData();
             posData.name = d.name;
             posData.category = d.category;
-            Visualizer.concierge.save(posData.name, posData.category, posData);
-            Visualizer.graph.verticalMenu.update_state();
+            GlobalViz.vis?.concierge.save(posData.name, posData.category, posData);
+            GlobalViz.vis?.graph.verticalMenu.update_state();
         })
         this.add_minimenu_button(group, "Copy to clipboard", this.miniMenuWidth * 3, "images/buttons/export.png", "#f5f5f5", "#acacac", function (d) {
-            d3utils.copyTextToClipboard(btoa(JSON.stringify(Visualizer.graph.posData(), null, 2)))
+            d3utils.copyTextToClipboard(btoa(JSON.stringify(GlobalViz.vis?.graph.posData(), null, 2)))
         })
 
         let mask = group.append('g')

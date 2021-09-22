@@ -17,10 +17,10 @@
 import MenuData from "../burger_menu/MenuData";
 import VerticalMenu, {DEFAULTHEIGHT} from "../burger_menu/VerticalMenu";
 import SchemaStack from "../burger_menu/SchemaStack";
-import Visualizer from "../Visualizer";
 import SchemaConfig from "../burger_menu/SchemaConfig";
 import AuthStack from "../burger_menu/AuthStack";
 import AuthConfig from "../burger_menu/AuthConfig";
+import GlobalViz from "../GlobalViz";
 
 export default class ConfigurationMenu extends VerticalMenu {
 
@@ -33,7 +33,7 @@ export default class ConfigurationMenu extends VerticalMenu {
         let schemaStack = new SchemaStack(this.actualWidth, DEFAULTHEIGHT, update_func);
         if (! this.openTo) schemaStack.expanded = true;
         this.data.add_child(schemaStack);
-        let schemas = Visualizer.config.schemas;
+        let schemas = GlobalViz.vis?.config.schemas;
         for (let schemaName in schemas) {
             let schema = new SchemaConfig(this.actualWidth, DEFAULTHEIGHT, schemas[schemaName])
             if (this.openTo && this.openTo.name === schemaName) {
@@ -44,7 +44,7 @@ export default class ConfigurationMenu extends VerticalMenu {
         }
         let authStack = new AuthStack(this.actualWidth, DEFAULTHEIGHT)
         this.data.add_child(authStack);
-        let authorizations = Visualizer.config.authorizations;
+        let authorizations = GlobalViz.vis?.config.authorizations;
         for (let authName in authorizations) {
             let auth = new AuthConfig(this.actualWidth, DEFAULTHEIGHT, authorizations[authName])
             if (this.openTo && this.openTo.name === authName) {

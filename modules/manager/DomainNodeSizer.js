@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 
 const bigClass = "domainheader";
 
@@ -31,7 +31,7 @@ export default class DomainNodeSizer {
     }
 
     _get_sizing(domain) {
-        let nameDetail = Visualizer.d3text_sizer.get_sizing(domain, bigClass);
+        let nameDetail = GlobalViz.vis?.d3text_sizer.get_sizing(domain, bigClass);
         let paddedWidth = nameDetail.width + this.marginX;
         let paddedHeight = nameDetail.height + this.marginY;
         this.height = paddedHeight > this.height ? paddedHeight : this.height;

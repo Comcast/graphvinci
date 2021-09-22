@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import Visualizer from '../Visualizer.js';
 import ExpandableStack from "./ExpandableStack";
 import CustomViewCategory from "./CustomViewCategory";
 import CustomView from "./CustomView";
 import MenuData from "./MenuData";
 import VerticalMenu, {DEFAULTWIDTH, DEFAULTHEIGHT} from "../burger_menu/VerticalMenu";
+import GlobalViz from "../GlobalViz";
 
 export default class SavedViewsMenu extends VerticalMenu {
 
@@ -28,7 +28,7 @@ export default class SavedViewsMenu extends VerticalMenu {
         /*
         Force a refresh if the schema has changed
          */
-        let currentName = Visualizer.config.get_current_schema().name;
+        let currentName = GlobalViz.vis?.config.get_current_schema().name;
         if (this.lastSchema) {
             if (currentName !== this.lastSchema) refresh = true;
 
@@ -45,7 +45,7 @@ export default class SavedViewsMenu extends VerticalMenu {
         let viewsStack = new ExpandableStack(DEFAULTWIDTH, DEFAULTHEIGHT, "Concierge", "Saved Views", update_func);
         if (this.openTo) viewsStack.expanded = true;
         this.data.add_child(viewsStack);
-        let cvs = Visualizer.concierge.get_current_list();
+        let cvs = GlobalViz.vis?.concierge.get_current_list();
         let first = true;
         if (this.openTo) first = false;
         for (let customView of cvs) {

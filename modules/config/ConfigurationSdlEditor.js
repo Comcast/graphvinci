@@ -15,11 +15,11 @@
  */
 
 import * as monaco from 'monaco-editor';
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 
 export default class ConfigurationSdlEditor {
     render({masterDiv: container}) {
-        let current = Visualizer.config.get_current_schema();
+        let current = GlobalViz.vis?.config.get_current_schema();
         if (current == null) {
             return;
         }

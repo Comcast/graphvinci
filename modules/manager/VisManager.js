@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer";
 import d3utils from "../utils/D3Utils";
+import GlobalViz from "../GlobalViz";
 
 export default class VisManager {
     constructor(node) {
@@ -69,7 +69,7 @@ export default class VisManager {
             .attr('transform', d => {
                 return "translate(" + (this.sizing.inputX(d.name) + 5) + "," + this.sizing.inputY + ")";
             })
-            .on('click', d => Visualizer.input_display.build(d));
+            .on('click', d => GlobalViz.vis?.input_display.build(d));
 
         inputRows.append("path")
             .attr('class', "decorated")

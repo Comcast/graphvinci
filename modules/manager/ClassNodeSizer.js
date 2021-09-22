@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 
 const MINHEIGHT = 5;
 const MINNAMEWIDTH = 10;
@@ -41,8 +41,8 @@ export default class ClassNodeSizer {
         this.hasInput = false;
         for (let field of fieldArray) {
             this.rows++;
-            let nameDetail = Visualizer.d3text_sizer.get_sizing(field.name);
-            let definitionDetail = Visualizer.d3text_sizer.get_sizing(field.definition);
+            let nameDetail = GlobalViz.vis?.d3text_sizer.get_sizing(field.name);
+            let definitionDetail = GlobalViz.vis?.d3text_sizer.get_sizing(field.definition);
             this.height = nameDetail.height > this.height ? nameDetail.height : this.height;
             this.height = definitionDetail.height > this.height ? definitionDetail.height : this.height;
             if (field.has_input) {
@@ -52,7 +52,7 @@ export default class ClassNodeSizer {
             this.nameWidth = nameDetail.width > this.nameWidth ? nameDetail.width : this.nameWidth;
             this.definitionWidth = definitionDetail.width > this.definitionWidth ? definitionDetail.width : this.definitionWidth;
             // Get the sizing for the X button
-            let closeDetail = Visualizer.d3text_sizer.get_sizing("x");
+            let closeDetail = GlobalViz.vis?.d3text_sizer.get_sizing("x");
             this.xHeight = closeDetail.height + this.marginY;
             this.xWidth = closeDetail.width + (this.marginY * 2);
         }

@@ -15,7 +15,7 @@
  */
 
 import * as d3 from "d3";
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 
 export default class SearchBar {
     constructor(parentDiv) {
@@ -64,7 +64,7 @@ export default class SearchBar {
                 return true;
             });
         if (needsKick) {
-            Visualizer.graph.kick();
+            GlobalViz.vis?.graph.kick();
         }
     }
 
@@ -92,7 +92,7 @@ export default class SearchBar {
                 return false;
             });
         if (needsKick) {
-            Visualizer.graph.kick();
+            GlobalViz.vis?.graph.kick();
         }
     }
 

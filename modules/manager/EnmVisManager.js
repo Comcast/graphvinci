@@ -91,8 +91,8 @@ export default class ClassVisManager extends VisManager {
                     return "translate(" + this.initialSizer.closerXPosition + ",0)";
                 })
                 .on("click", d => {
-                    GlobalViz.vis.domainState.exclude_node(this.node.id);
-                    GlobalViz.vis.graph.update_viz();
+                    GlobalViz.vis?.domainState.exclude_node(this.node.id);
+                    GlobalViz.vis?.graph.update_viz();
                 });
 
             remButton.append('rect')

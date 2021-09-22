@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer";
+import GlobalViz from '../GlobalViz';
 export const noDomain = "Uncategorized";
 
 export default class DomainMetaManager {
     constructor() {
-        this.domainPatternMatch = Visualizer.config.domainMatch || /GV\((.*?)\s*,\s*(.*?)\)/;
+        this.domainPatternMatch = GlobalViz.vis?.config.domainMatch || /GV\((.*?)\s*,\s*(.*?)\)/;
         this.multiMatch = new RegExp(this.domainPatternMatch.source, this.domainPatternMatch.flags + "g");
     }
 
@@ -30,7 +30,7 @@ export default class DomainMetaManager {
         }
         this._override(domainInfo, parentDomain)
             ._override(domainInfo, this._parse_domain_info_from_description(field.description))
-            ._override(domainInfo, Visualizer.config?.get_current_schema()?.get_domain_mapping(parentName + "." + field.name));
+            ._override(domainInfo, GlobalViz.vis?.config?.get_current_schema()?.get_domain_mapping(parentName + "." + field.name));
         return domainInfo;
     }
 
@@ -45,7 +45,7 @@ export default class DomainMetaManager {
             domainInfo.cmt = defaultDomainInfo.cmt;
         }
         this._override(domainInfo, this._parse_domain_info_from_description(nodeObj.description))
-        this._override(domainInfo, Visualizer.config.get_current_schema().get_domain_mapping(nodeObj.name));
+        this._override(domainInfo, GlobalViz.vis?.config.get_current_schema().get_domain_mapping(nodeObj.name));
         return domainInfo;
     }
 
@@ -59,7 +59,7 @@ export default class DomainMetaManager {
             cmt: noDomain
         }
         this._override(domainInfo, this._parse_domain_info_from_description(nodeObj.description))
-        this._override(domainInfo, Visualizer.config.get_current_schema().get_domain_mapping(nodeObj.name));
+        this._override(domainInfo, GlobalViz.vis?.config.get_current_schema().get_domain_mapping(nodeObj.name));
         return domainInfo;
     }
 

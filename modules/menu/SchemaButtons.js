@@ -15,7 +15,7 @@
  */
 
 import BasicButton from "./BasicButton";
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 import * as d3 from "d3";
 import {states} from "../config/DomainState";
 import {Separator} from "./HMenu";
@@ -43,7 +43,7 @@ export default class SchemaButtons {
         data.push(new BasicButton(this.height, this.defaultWidth, "position", "images/buttons/views.png", "Save This View", this.position));
         data.push(new Separator(6, this.height, "Entity"));
         data.push(new BasicButton(this.height, this.defaultWidth, "grenadesave", "images/buttons/saveglobal.png", "Set the default kaboom for this endpoint", this.grenadesave));
-        if (Visualizer.concierge.default_is_override()) {
+        if (GlobalViz.vis?.concierge.default_is_override()) {
             data.push(new Separator(6, this.height, "Entity"));
             data.push(new BasicButton(this.height, this.defaultWidth, "grenadesave", "images/buttons/clearglobal.png", "Remove the default kaboom for this endpoint", this.cleardefault));
         }
@@ -53,19 +53,19 @@ export default class SchemaButtons {
     }
 
     position() {
-        Visualizer.concierge_push.flip('Regular');
+        GlobalViz.vis?.concierge_push.flip('Regular');
     }
 
     grenadesave() {
-        Visualizer.concierge_push.flip('Grenade');
+        GlobalViz.vis?.concierge_push.flip('Grenade');
     }
 
     cleardefault() {
-        Visualizer.concierge.clearDefault();
+        GlobalViz.vis?.concierge.clearDefault();
     }
 
     reset() {
-        Visualizer.reset_viz();
+        GlobalViz.vis?.reset_viz();
     }
 
     image() {
@@ -86,7 +86,7 @@ export default class SchemaButtons {
             }
         }
 
-        let svg = Visualizer.graph.parentSvg;
+        let svg = GlobalViz.vis?.graph.parentSvg;
         let img = new Image();
         let serializer = new XMLSerializer();
         svg.insert('defs', ":first-child");
@@ -103,38 +103,38 @@ export default class SchemaButtons {
     }
 
     stick() {
-        Visualizer.graph.stick();
+        GlobalViz.vis?.graph.stick();
     }
 
     unstick() {
-        Visualizer.graph.unstick();
+        GlobalViz.vis?.graph.unstick();
     }
 
     kaboom() {
-        Visualizer.domainState.clear_excluded_nodes();
-        Visualizer.graph.re_parent();
-        Visualizer.graph.unstick();
-        for (let domain of Visualizer.domainState.domain_list) {
-            Visualizer.domainState.set_domain_state(domain, states.NODES);
+        GlobalViz.vis?.domainState.clear_excluded_nodes();
+        GlobalViz.vis?.graph.re_parent();
+        GlobalViz.vis?.graph.unstick();
+        for (let domain of GlobalViz.vis?.domainState.domain_list) {
+            GlobalViz.vis?.domainState.set_domain_state(domain, states.NODES);
         }
-        let data = Visualizer.concierge.retrieve("ALL", "DVIEW");
+        let data = GlobalViz.vis?.concierge.retrieve("ALL", "DVIEW");
         if (data) {
-            setTimeout(() => Visualizer.graph.update_viz(data), 2500);
+            setTimeout(() => GlobalViz.vis?.graph.update_viz(data), 2500);
         }
     }
 
     unkaboom() {
-        Visualizer.graph.reset_zoom();
-        Visualizer.domainState.clear_excluded_nodes();
-        for (let domain of Visualizer.domainState.domain_list) {
-            Visualizer.domainState.set_domain_state(domain, states.MINIMIZED);
+        GlobalViz.vis?.graph.reset_zoom();
+        GlobalViz.vis?.domainState.clear_excluded_nodes();
+        for (let domain of GlobalViz.vis?.domainState.domain_list) {
+            GlobalViz.vis?.domainState.set_domain_state(domain, states.MINIMIZED);
         }
     }
 
     nothing() {
-        Visualizer.domainState.clear_excluded_nodes();
-        for (let domain of Visualizer.domainState.domain_list) {
-            Visualizer.domainState.set_domain_state(domain, states.REMOVED);
+        GlobalViz.vis?.domainState.clear_excluded_nodes();
+        for (let domain of GlobalViz.vis?.domainState.domain_list) {
+            GlobalViz.vis?.domainState.set_domain_state(domain, states.REMOVED);
         }
     }
 

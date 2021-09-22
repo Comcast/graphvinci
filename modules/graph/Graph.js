@@ -15,7 +15,7 @@
  */
 
 import * as d3 from "d3";
-import Visualizer from '../Visualizer.js';
+import GlobalViz from "../GlobalViz";
 import SchemaDomain from "../schema/SchemaDomain.js";
 import {states} from '../config/DomainState.js';
 import WheelManager from "../wheel/WheelManager";
@@ -153,8 +153,6 @@ export default class Graph {
     run_viz(schema) {
         this.schema = schema;
         this.clear_window();
-        //Visualizer.menuBar.build(Visualizer.schema, Visualizer.domainState);
-        //Visualizer.searchBar.build();
         this.linkGroup = this.svg.append("g")
             .attr("class", "link");
 
@@ -167,7 +165,7 @@ export default class Graph {
 
     re_parent() {
         //if (this.reParented) return;
-        for (let d of Visualizer.schema.nodes) {
+        for (let d of GlobalViz.vis?.schema.nodes) {
             if (typeof (d.parent) !== 'undefined' &&
                 typeof (d.parent.x !== 'undefined')) {
                 d.x = this._randomize(d.parent.x, 200);
@@ -180,7 +178,7 @@ export default class Graph {
     }
 
     unstick() {
-        for (let d of Visualizer.schema.nodes) {
+        for (let d of GlobalViz.vis?.schema.nodes) {
             d.fx = null;
             d.fy = null;
         }
@@ -202,7 +200,7 @@ export default class Graph {
     }
 
     stick() {
-        for (let d of Visualizer.schema.nodes) {
+        for (let d of GlobalViz.vis?.schema.nodes) {
             d.fx = d.x;
             d.fy = d.y;
         }
@@ -212,7 +210,7 @@ export default class Graph {
     update_viz(conciergeState) {
         let self = this;
         this.conciergeMode = !!(conciergeState);
-        let nodeEdgeData = Visualizer.schema.nodes_and_edges(Visualizer.domainState, conciergeState);
+        let nodeEdgeData = GlobalViz.vis?.schema.nodes_and_edges(GlobalViz.vis?.domainState, conciergeState);
         let nodeData = nodeEdgeData.nodes;
         this.nodeCount = nodeData.length;
         let edgeData = nodeEdgeData.edges;
@@ -322,7 +320,7 @@ export default class Graph {
 
             if (d instanceof SchemaDomain) {
                 //this.re_parent();
-                Visualizer.domainState.set_domain_state(d.name, states.NODES);
+                GlobalViz.vis?.domainState.set_domain_state(d.name, states.NODES);
                 //this.update_viz();
             }
 
@@ -499,7 +497,7 @@ export default class Graph {
 
     posData() {
         let posData = {};
-        posData.domainKey = Visualizer.domainState.get_key();
+        posData.domainKey = GlobalViz.vis?.domainState.get_key();
         posData.currentZoom = this.currentZoom;
         posData.nodes = {};
         posData.edges = {};

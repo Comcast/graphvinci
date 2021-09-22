@@ -16,7 +16,7 @@
 
 import {CONTRASTCOLOR} from "./VerticalMenu.js";
 import StackableElementWithButtons from "./StackableElementWithButtons";
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 const MAX_CHARS = 13;
 
 export default class SchemaConfig extends StackableElementWithButtons  {
@@ -31,10 +31,10 @@ export default class SchemaConfig extends StackableElementWithButtons  {
                 fillColor: "#f5f5f5",
                 strokeColor: "#acacac",
                 clickFunction: function(d){
-                    Visualizer.config.delete_schema(schema)
-                    let newCurrent = Visualizer.config.get_current_schema()
-                    Visualizer.config_manager.verticalMenu.set_open_to(newCurrent, true)
-                    Visualizer.config_manager.render({})
+                    GlobalViz.vis?.config.delete_schema(schema)
+                    let newCurrent = GlobalViz.vis?.config.get_current_schema()
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(newCurrent, true)
+                    GlobalViz.vis?.config_manager.render({})
                 }
             }
         )
@@ -46,10 +46,10 @@ export default class SchemaConfig extends StackableElementWithButtons  {
                 fillColor: "#f5f5f5",
                 strokeColor: "#acacac",
                 clickFunction: function(d){
-                    let cloned = Visualizer.config.clone_schema(schema);
-                    Visualizer.config.set_current_schema(cloned.name)
-                    Visualizer.config_manager.verticalMenu.set_open_to(cloned)
-                    Visualizer.config_manager.render({})
+                    let cloned = GlobalViz.vis?.config.clone_schema(schema);
+                    GlobalViz.vis?.config.set_current_schema(cloned.name)
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(cloned)
+                    GlobalViz.vis?.config_manager.render({})
                 }
             }
         )
@@ -81,9 +81,9 @@ export default class SchemaConfig extends StackableElementWithButtons  {
             .attr('fill', "#fff")
             .classed('mousepointer', true)
             .on('click', d => {
-                Visualizer.config.set_current_schema(this.schema.name);
-                Visualizer.config_manager.verticalMenu.set_open_to(this.schema)
-                Visualizer.config_manager.update()
+                GlobalViz.vis?.config.set_current_schema(this.schema.name);
+                GlobalViz.vis?.config_manager.verticalMenu.set_open_to(this.schema)
+                GlobalViz.vis?.config_manager.update()
             })
         if (this.schema.name.length > MAX_CHARS) {
             let abbreviated = this.schema.name.slice(0,MAX_CHARS) + "...";

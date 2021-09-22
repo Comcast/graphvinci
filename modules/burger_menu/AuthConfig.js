@@ -16,7 +16,7 @@
 
 import {CONTRASTCOLOR} from "./VerticalMenu.js";
 import StackableElementWithButtons from "./StackableElementWithButtons";
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 const MAX_CHARS = 13;
 
 export default class AuthConfig extends StackableElementWithButtons  {
@@ -31,9 +31,9 @@ export default class AuthConfig extends StackableElementWithButtons  {
                 fillColor: "#f5f5f5",
                 strokeColor: "#acacac",
                 clickFunction: function(d){
-                    Visualizer.config.delete_auth(auth)
-                    Visualizer.config_manager.verticalMenu.set_open_to(Visualizer.config.get_fallback_auth(), true)
-                    Visualizer.config_manager.render({})
+                    GlobalViz.vis?.config.delete_auth(auth)
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(GlobalViz.vis?.config.get_fallback_auth(), true)
+                    GlobalViz.vis?.config_manager.render({})
                 }
             }
         )
@@ -45,9 +45,9 @@ export default class AuthConfig extends StackableElementWithButtons  {
                 fillColor: "#f5f5f5",
                 strokeColor: "#acacac",
                 clickFunction: function(d){
-                    let cloned = Visualizer.config.clone_auth(auth);
-                    Visualizer.config_manager.verticalMenu.set_open_to(cloned)
-                    Visualizer.config_manager.render({})
+                    let cloned = GlobalViz.vis?.config.clone_auth(auth);
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(cloned)
+                    GlobalViz.vis?.config_manager.render({})
                 }
             }
         )
@@ -79,8 +79,8 @@ export default class AuthConfig extends StackableElementWithButtons  {
             .attr('fill', "#fff")
             .classed('mousepointer', true)
             .on('click', d => {
-                Visualizer.config_manager.verticalMenu.set_open_to(this.auth)
-                Visualizer.config_manager.update()
+                GlobalViz.vis?.config_manager.verticalMenu.set_open_to(this.auth)
+                GlobalViz.vis?.config_manager.update()
             })
         if (this.auth.name.length > MAX_CHARS) {
             let abbreviated = this.auth.name.slice(0,MAX_CHARS) + "...";

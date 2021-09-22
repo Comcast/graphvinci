@@ -15,7 +15,7 @@
  */
 
 import {getIntrospectionQuery} from "graphql";
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 
 export default class ProxyManager {
 
@@ -28,7 +28,7 @@ export default class ProxyManager {
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "cross-site",
             ...authHeaders,
-            ...Visualizer.config.get_current_schema().additional_headers()
+            ...GlobalViz.vis?.config.get_current_schema().additional_headers()
         }
         return {
             headers,
@@ -41,7 +41,7 @@ export default class ProxyManager {
     }
 
     send_query(query, variables) {
-        return Visualizer.config.get_current_authorization()
+        return GlobalViz.vis?.config.get_current_authorization()
             .fetch_auth_headers()
             .then(headers => {
                 let bodyData = JSON.stringify({
@@ -50,7 +50,7 @@ export default class ProxyManager {
                     operationName: null
                 })
                 let initData = this._get_init_data(headers, bodyData);
-                return fetch(Visualizer.config.get_current_schema().url, initData)
+                return fetch(GlobalViz.vis?.config.get_current_schema().url, initData)
                     .then(resp => {
                         if (!resp.ok) {
                             throw Error("Error sending request: " + resp.statusText + " => " + resp.status);

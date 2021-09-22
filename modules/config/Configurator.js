@@ -16,6 +16,7 @@
 
 import GraphVinciSchema from "./GraphVinciSchema";
 import SchemaAuthorization, {NOAUTH} from "./SchemaAuthorization";
+import GlobalViz from "../GlobalViz";
 
 const SCHEMAS = "Schemas.v3";
 const AUTHORIZATIONS = "Authorizations.v3";
@@ -111,10 +112,10 @@ export default class Configurator {
             this.save();
             let schema = this.get_current_schema();
             if (schema.sdl) {
-                Visualizer.apply_current_schema();
+                GlobalViz.vis?.apply_current_schema();
             }
             else {
-                Visualizer.horizontalMenu.build();
+                GlobalViz.vis?.horizontalMenu.build();
             }
         }
 

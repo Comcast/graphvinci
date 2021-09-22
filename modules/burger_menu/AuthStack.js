@@ -16,6 +16,7 @@
 
 import {CONTRASTCOLOR} from "./VerticalMenu.js";
 import StackableElementWithButtons from "./StackableElementWithButtons";
+import GlobalViz from "../GlobalViz";
 
 export default class AuthStack extends StackableElementWithButtons  {
     constructor(width, height) {
@@ -28,9 +29,9 @@ export default class AuthStack extends StackableElementWithButtons  {
                 fillColor: "#f5f5f5",
                 strokeColor: "#acacac",
                 clickFunction: function(){
-                    let auth = Visualizer.config.add_new_blank_auth();
-                    Visualizer.config_manager.verticalMenu.set_open_to(auth)
-                    Visualizer.config_manager.render({})
+                    let auth = GlobalViz.vis?.config.add_new_blank_auth();
+                    GlobalViz.vis?.config_manager.verticalMenu.set_open_to(auth)
+                    GlobalViz.vis?.config_manager.render({})
                 }
             }
         )
@@ -57,14 +58,14 @@ export default class AuthStack extends StackableElementWithButtons  {
             .classed('mousepointer', true)
             .on('click', d => {
                 let current = d.expanded;
-                Visualizer.config_manager.verticalMenu.set_open_to(null)
+                GlobalViz.vis?.config_manager.verticalMenu.set_open_to(null)
                 if (current) {
                     d.contract();
                 }
                 else {
                     d.expand();
                 }
-                Visualizer.config_manager.update({});
+                GlobalViz.vis?.config_manager.update({});
             })
         this.add_buttons(group, false)
     }

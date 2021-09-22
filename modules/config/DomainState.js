@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer.js";
-
+import GlobalViz from "../GlobalViz";
 
 export const states = {
     MINIMIZED: 0,
@@ -55,7 +54,7 @@ export default class DomainState {
     remove_domain_excluded_nodes(domain) {
         let count = 0;
         for (let node of this.excludeNodes) {
-            if (Visualizer.schema.get_node_domain(node) === domain) {
+            if (GlobalViz.vis?.schema.get_node_domain(node) === domain) {
                 this.excludeNodes.delete(node);
                 count++;
             }
@@ -110,24 +109,24 @@ export default class DomainState {
     }
 
     _menus_only_update() {
-        Visualizer.graph.verticalMenu.update_state();
-        Visualizer.horizontalMenu.update_state();
+        GlobalViz.vis?.graph.verticalMenu.update_state();
+        GlobalViz.vis?.horizontalMenu.update_state();
     }
 
     _quiet_update(domain, state) {
-        Visualizer.graph.re_parent();
-        Visualizer.set_domain_expansion(domain, state);
-        Visualizer.graph.verticalMenu.update_state();
-        Visualizer.horizontalMenu.update_state();
-        Visualizer.graph.kick();
+        GlobalViz.vis?.graph.re_parent();
+        GlobalViz.vis?.set_domain_expansion(domain, state);
+        GlobalViz.vis?.graph.verticalMenu.update_state();
+        GlobalViz.vis?.horizontalMenu.update_state();
+        GlobalViz.vis?.graph.kick();
     }
 
     _noisy_update(domain, state) {
-        Visualizer.graph.re_parent();
-        Visualizer.graph.update_viz();
-        Visualizer.graph.verticalMenu.update_state();
-        Visualizer.horizontalMenu.update_state();
-        Visualizer.set_domain_expansion(domain, state);
+        GlobalViz.vis?.graph.re_parent();
+        GlobalViz.vis?.graph.update_viz();
+        GlobalViz.vis?.graph.verticalMenu.update_state();
+        GlobalViz.vis?.horizontalMenu.update_state();
+        GlobalViz.vis?.set_domain_expansion(domain, state);
     }
 
     reset() {

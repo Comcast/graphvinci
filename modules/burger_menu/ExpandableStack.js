@@ -16,7 +16,7 @@
 
 import StackableElement from "./StackableElement.js";
 import {CONTRASTCOLOR} from "./VerticalMenu.js";
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 
 export default class ExpandableStack extends StackableElement  {
     constructor(width, height, type, text, menu_update_func) {
@@ -46,7 +46,7 @@ export default class ExpandableStack extends StackableElement  {
             .classed('mousepointer', true)
             .on('click', d => {
                 let current = d.expanded;
-                Visualizer.graph.verticalMenu.set_open_to(null);
+                GlobalViz.vis?.graph.verticalMenu.set_open_to(null);
                 if (current) {
                     d.contract();
                 }

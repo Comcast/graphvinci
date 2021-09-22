@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer.js";
+import GlobalViz from "../GlobalViz";
 import * as d3 from "d3";
 
 export default class ConciergePush {
@@ -68,7 +68,7 @@ export default class ConciergePush {
 
             });
 
-        let types = Visualizer.concierge.get_current_category_list();
+        let types = GlobalViz.vis?.concierge.get_current_category_list();
         let typeSelect = container.append('select')
             .attr('placeholder', 'Add your first category to proceed...')
 
@@ -109,20 +109,20 @@ export default class ConciergePush {
                         return;
                     }
                 }
-                let posData = (importData) ? importData : Visualizer.graph.posData();
+                let posData = (importData) ? importData : GlobalViz.vis?.graph.posData();
                 posData.name = nameInput.property('value');
                 posData.category = typeSelect.property('value');
                 if (! posData.name || ! posData.category) {
                     alert('You need a name and a category to save a layout')
                     return;
                 }
-                Visualizer.concierge.save(posData.name, posData.category, posData);
+                GlobalViz.vis?.concierge.save(posData.name, posData.category, posData);
                 container.selectAll('*').remove();
                 container.append('h2').html('Layout submitted');
                 setTimeout(() => {
                     self.destroy();
-                    Visualizer.graph.verticalMenu.set_open_to({name: posData.category})
-                    Visualizer.graph.verticalMenu.render({refresh: true});
+                    GlobalViz.vis?.graph.verticalMenu.set_open_to({name: posData.category})
+                    GlobalViz.vis?.graph.verticalMenu.render({refresh: true});
                 }, 1000);
             });
     }
@@ -154,11 +154,11 @@ export default class ConciergePush {
             .attr('type', "submit")
             .attr('value', "Save")
             .on("click", function() {
-                let posData = Visualizer.graph.posData();
+                let posData = GlobalViz.vis?.graph.posData();
                 posData.name = "ALL";
                 posData.description = "Override Grenade";
                 posData.category = "DVIEW";
-                Visualizer.concierge.save_default(posData, true);
+                GlobalViz.vis?.concierge.save_default(posData, true);
                 container.selectAll('*').remove();
                 container.append('h2').html('Layout submitted');
                 setTimeout(() => container.remove(), 1000);

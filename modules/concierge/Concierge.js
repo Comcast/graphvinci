@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer";
+import GlobalViz from '../GlobalViz'
 
 export default class Concierge {
 
@@ -25,7 +25,7 @@ export default class Concierge {
     }
 
     get_stored() {
-        let schema = Visualizer.config.get_current_schema();
+        let schema = GlobalViz.vis.config.get_current_schema();
         if (schema && schema.savedViews) {
             return schema.savedViews;
         }
@@ -49,8 +49,8 @@ export default class Concierge {
             stored[domainSelector] &&
             stored[domainSelector][this.grenadeKey]) {
             delete stored[domainSelector][this.grenadeKey];
-            Visualizer.config.save();
-            Visualizer.horizontalMenu.build();
+            GlobalViz.vis.config.save();
+            GlobalViz.vis.horizontalMenu.build();
         }
     }
 
@@ -134,7 +134,7 @@ export default class Concierge {
     save_default(posData, override) {
         posData.override = override;
         this._store(this.grenadeKey, undefined, posData);
-        Visualizer.horizontalMenu.build();
+        GlobalViz.vis.horizontalMenu.build();
     }
 
     remove(name, category) {
@@ -158,7 +158,7 @@ export default class Concierge {
             }
         }
         stored[domainSelector][category] = newCat;
-        Visualizer.config.save();
+        GlobalViz.vis.config.save();
     }
 
     _store(name, category, posData) {
@@ -179,8 +179,8 @@ export default class Concierge {
         } else {
             stored[domainSelector][name] = posData;
         }
-        Visualizer.config.get_current_schema().savedViews = stored;
-        Visualizer.config.save();
+        GlobalViz.vis.config.get_current_schema().savedViews = stored;
+        GlobalViz.vis.config.save();
     }
 
     _get_domain_selector() {

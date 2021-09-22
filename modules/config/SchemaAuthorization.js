@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import Visualizer from "../Visualizer";
-
 export const BEARER = "Bearer";
 export const OAUTHCC = "OAuth2 Client Credentials";
 export const NOAUTH = "None";

@@ -17,7 +17,6 @@
 import '../styles/schema-config.css';
 import ConfigurationMenu from "./ConfigurationMenu";
 import ConfigurationForm from "./ConfigurationForm";
-import Visualizer from '../Visualizer'
 import ConfigurationSdlEditor from "./ConfigurationSdlEditor";
 
 export default class SchemaConfigManager {

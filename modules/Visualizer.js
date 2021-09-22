@@ -28,12 +28,7 @@ import D3TextSizer from "./utils/D3TextSizer";
 import InputDisplay from "./input/InputDisplay";
 import './styles/app.css';
 import SchemaConfigManager from "./config/SchemaConfigManager";
-
-export const states = {
-    Schema: 0,
-    Editor: 1,
-    Setup: 2
-};
+import { states } from "./VisStates";
 
 class Visualizer {
 
