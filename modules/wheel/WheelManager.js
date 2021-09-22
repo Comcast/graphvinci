@@ -66,7 +66,7 @@ export default class WheelManager {
             .attr("height", '100%');
 
         this.domains = []
-        for (let domain of GlobalViz.vis?.domainState.domain_list.sort()) {
+        for (let domain of GlobalViz.vis.domainState.domain_list.sort()) {
             this.domains.push(new WheelElement(domain))
         }
         this.draw(0)
@@ -172,15 +172,15 @@ export default class WheelManager {
                 self._quiet(d.data.name)
             })
             .style('opacity', (d) => {
-                let state = GlobalViz.vis?.domainState.get_domain_state(d.data.name);
+                let state = GlobalViz.vis.domainState.get_domain_state(d.data.name);
                 return (state === states.REMOVED) ? 0.2 : 1;
             })
             .on('click', (d) => {
-                let state = GlobalViz.vis?.domainState.get_domain_state(d.data.name);
+                let state = GlobalViz.vis.domainState.get_domain_state(d.data.name);
                 if (state === states.REMOVED) {
-                    GlobalViz.vis?.domainState.set_domain_state(d.data.name, states.MINIMIZED);
+                    GlobalViz.vis.domainState.set_domain_state(d.data.name, states.MINIMIZED);
                 } else {
-                    GlobalViz.vis?.domainState.set_domain_state(d.data.name, states.REMOVED);
+                    GlobalViz.vis.domainState.set_domain_state(d.data.name, states.REMOVED);
                 }
                 this._quiet(d.data.name)
             })
@@ -235,7 +235,7 @@ export default class WheelManager {
         if (!this.initialized) return;
         this.pies
             .style('opacity', (d) => {
-                let state = GlobalViz.vis?.domainState.get_domain_state(d.data.name);
+                let state = GlobalViz.vis.domainState.get_domain_state(d.data.name);
                 return (state === states.REMOVED) ? 0.2 : 0.8;
             })
     }
@@ -256,9 +256,9 @@ export default class WheelManager {
             .append('g')
             .attr('class', 'mousepointer')
             .on('click', () => {
-                let state = GlobalViz.vis?.domainState.get_domain_state(domain);
+                let state = GlobalViz.vis.domainState.get_domain_state(domain);
                 if (state !== states.EXPANDED) {
-                    GlobalViz.vis?.domainState.set_domain_state(domain, states.EXPANDED);
+                    GlobalViz.vis.domainState.set_domain_state(domain, states.EXPANDED);
                 }
             })
 
@@ -282,9 +282,9 @@ export default class WheelManager {
             .append('g')
             .attr('class', 'mousepointer')
             .on('click', () => {
-                let state = GlobalViz.vis?.domainState.get_domain_state(domain);
+                let state = GlobalViz.vis.domainState.get_domain_state(domain);
                 if (state !== states.NODES) {
-                    GlobalViz.vis?.domainState.set_domain_state(domain, states.NODES);
+                    GlobalViz.vis.domainState.set_domain_state(domain, states.NODES);
                     this._quiet(domain)
                 }
             })
@@ -313,11 +313,11 @@ export default class WheelManager {
             .append("g")
             .attr('class', "wheelDomain mousepointer")
             .on('click', () => {
-                let state = GlobalViz.vis?.domainState.get_domain_state(domain);
+                let state = GlobalViz.vis.domainState.get_domain_state(domain);
                 if (state === states.REMOVED) {
-                    GlobalViz.vis?.domainState.set_domain_state(domain, states.MINIMIZED);
+                    GlobalViz.vis.domainState.set_domain_state(domain, states.MINIMIZED);
                 } else {
-                    GlobalViz.vis?.domainState.set_domain_state(domain, states.REMOVED);
+                    GlobalViz.vis.domainState.set_domain_state(domain, states.REMOVED);
                 }
                 this._quiet(domain)
             })

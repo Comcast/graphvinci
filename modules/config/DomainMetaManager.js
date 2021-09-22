@@ -15,7 +15,7 @@
  */
 
 import GlobalViz from '../GlobalViz';
-import noDomain from '../Constants'
+import { noDomain } from '../Constants'
 
 class DomainMetaManager {
     constructor() {
