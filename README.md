@@ -22,7 +22,7 @@ Create and save custom, shareable schema views that promote cross-developer data
 
 ## How can I run GraphVinci?
 
-GraphVinci is built as static content with minimal dependencies and uses parcel to bundle.  To test it out, just "npm install" to add the dependencies, and "npm start" and parcel will host the visualizer locally.  The output from "npm build" can be served as static content in any manner that you choose.  Additional options (npm, docker images etc) will be created as the project matures
+GraphVinci is built as static content with minimal dependencies and uses parcel to bundle.  To test it out (using node v14+ is recommended), just "npm install" to add the dependencies, and "npm start" and parcel will host the visualizer locally.  The output from "npm build" can be served as static content in any manner that you choose.  Additional options (npm, docker images etc) will be created as the project matures
 
 
 ## FAQ
@@ -38,10 +38,6 @@ Yes.  If a field in a type is "logically" owned by a separate group (as is the c
 #### Is it possible to "nest" groups within groups?
 
 Technically this *might* be possible, but the challenges in making this "work" effectively mean that this feature is unlikely to come soon
-
-#### Is introspection the only method of importing a schema?
-
-Currently yes, but we will be adding sdl interpretation (and direct edit) shortly
 
 #### Any plans for a GraphQL browser with visualization options?
 
