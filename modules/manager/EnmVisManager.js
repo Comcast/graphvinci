@@ -16,7 +16,7 @@
 
 import ClassNodeSizer from './ClassNodeSizer.js';
 import * as d3 from "d3";
-import Visualizer from '../Visualizer.js';
+import GlobalViz from '../GlobalViz'
 import VisManager from './VisManager.js';
 import d3utils from "../utils/D3Utils";
 
@@ -91,8 +91,8 @@ export default class ClassVisManager extends VisManager {
                     return "translate(" + this.initialSizer.closerXPosition + ",0)";
                 })
                 .on("click", d => {
-                    Visualizer.domainState.exclude_node(this.node.id);
-                    Visualizer.graph.update_viz();
+                    GlobalViz.vis.domainState.exclude_node(this.node.id);
+                    GlobalViz.vis.graph.update_viz();
                 });
 
             remButton.append('rect')

@@ -15,6 +15,7 @@
  */
 
 import * as d3 from "d3";
+import GlobalViz from "./GlobalViz";
 import Graph from "./graph/Graph.js";
 import HorizontalMenu from "./menu/HorizontalMenu.js";
 import DomainState from "./config/DomainState.js";
@@ -40,6 +41,7 @@ class Visualizer {
         this.config = configurator;
         this.state = states.Schema;
         this._build_components()
+        GlobalViz.vis = this; // Sets a non-circular dependency globally
         return this;
     }
 

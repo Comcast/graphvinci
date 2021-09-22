@@ -18,7 +18,7 @@ import ClassNodeSizer from './ClassNodeSizer.js';
 import * as d3 from "d3";
 import VisManager from './VisManager.js';
 import d3utils from "../utils/D3Utils";
-import Visualizer from "../Visualizer";
+import GlobalViz from "../GlobalViz";
 
 export default class EntryPointVisManager extends VisManager {
     constructor(node) {
@@ -88,8 +88,8 @@ export default class EntryPointVisManager extends VisManager {
                     return "translate(" + this.initialSizer.closerXPosition + ",0)";
                 })
                 .on("click", d => {
-                    Visualizer.domainState.exclude_node(this.node.id);
-                    Visualizer.graph.update_viz();
+                    GlobalViz.vis.domainState.exclude_node(this.node.id);
+                    GlobalViz.vis.graph.update_viz();
                 });
 
             remButton.append('rect')
@@ -137,7 +137,7 @@ export default class EntryPointVisManager extends VisManager {
                         text = "M";
                         break;
                 }
-                d.decoratorSize = Visualizer.d3text_sizer.get_sizing("Q", clazz);
+                d.decoratorSize = GlobalViz.vis.d3text_sizer.get_sizing("Q", clazz);
                 return text;
             })
             .attr('class', clazz)

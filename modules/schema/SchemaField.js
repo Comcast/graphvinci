@@ -15,11 +15,11 @@
  */
 
 import DomainAwareEntity from "./DomainAwareEntity.js";
-import Visualizer from "../Visualizer";
+import GlobalViz from '../GlobalViz';
 
 export default class SchemaField extends DomainAwareEntity {
     constructor(field, enumMap, parentName, parentDomain) {
-        super(Visualizer.domain_meta_manager.parse_field_metadata(field, parentName, parentDomain));
+        super(GlobalViz.vis.domain_meta_manager.parse_field_metadata(field, parentName, parentDomain));
         this.parentName = parentName;
         this.enumMap = enumMap;
         this.rootKind = "UNKNOWN";

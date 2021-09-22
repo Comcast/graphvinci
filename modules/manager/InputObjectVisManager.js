@@ -16,7 +16,7 @@
 
 import ClassNodeSizer from './ClassNodeSizer.js';
 import * as d3 from "d3";
-import D3Utils from "../utils/D3Utils";
+import d3utils from "../utils/D3Utils";
 
 export default class InputObjectVisManager {
     constructor(node) {
