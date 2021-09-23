@@ -19,10 +19,6 @@ import domainMetaManager from "../config/DomainMetaManager";
 
 export default class SchemaField extends DomainAwareEntity {
     constructor(field, enumMap, parentName, parentDomain) {
-        if (! parentDomain) {
-            console.log("No parent Domain")
-        }
-        console.log("Parent: " + parentDomain)
         super(domainMetaManager.parse_field_metadata(field, parentName, parentDomain));
         this.parentName = parentName;
         this.enumMap = enumMap;
@@ -33,7 +29,6 @@ export default class SchemaField extends DomainAwareEntity {
         this.isInterface = false;
         this.isUnion = false;
         this._get_field_type(field);
-        console.log("Domain " + this.domain)
     }
 
     get args() {

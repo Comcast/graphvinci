@@ -1,0 +1,16 @@
+{
+  "name": "graphvinci_container",
+  "version": "1.0.0",
+  "description": "Visualization sample service",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Dave Beaumont",
+  "license": "Apache2",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

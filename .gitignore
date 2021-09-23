@@ -40,3 +40,4 @@ static/
 .DS_Store
 
 repolinter.json
+dockerapp/public/

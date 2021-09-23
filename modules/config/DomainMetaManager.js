@@ -49,20 +49,6 @@ class DomainMetaManager {
         return domainInfo;
     }
 
-    parse_node_metadata2(nodeObj, test) {
-        if (test) {
-            console.log(test)
-        }
-        // Get the default domain info
-        let domainInfo = {
-            default: "cmt",
-            cmt: noDomain
-        }
-        this._override(domainInfo, this._parse_domain_info_from_description(nodeObj.description))
-        this._override(domainInfo, GlobalViz.vis?.config.get_current_schema().get_domain_mapping(nodeObj.name));
-        return domainInfo;
-    }
-
     _override(master, source) {
         if (! source) {
             return this;

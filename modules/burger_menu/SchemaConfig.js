@@ -81,9 +81,9 @@ export default class SchemaConfig extends StackableElementWithButtons  {
             .attr('fill', "#fff")
             .classed('mousepointer', true)
             .on('click', d => {
-                GlobalViz.vis?.config.set_current_schema(this.schema.name);
-                GlobalViz.vis?.config_manager.verticalMenu.set_open_to(this.schema)
-                GlobalViz.vis?.config_manager.update()
+                GlobalViz.vis.config.set_current_schema(this.schema.name);
+                GlobalViz.vis.config_manager.verticalMenu.set_open_to(this.schema)
+                GlobalViz.vis.config_manager.update()
             })
         if (this.schema.name.length > MAX_CHARS) {
             let abbreviated = this.schema.name.slice(0,MAX_CHARS) + "...";
