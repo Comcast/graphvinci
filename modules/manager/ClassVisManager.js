@@ -306,7 +306,7 @@ export default class ClassVisManager extends VisManager {
             .attr('text-anchor', 'end');
 
 
-        fieldRows.filter(d => ['OBJECT', 'INTERFACE', 'ENUM'].includes(d.rootKind))
+        fieldRows.filter(d => ['OBJECT', 'INTERFACE', 'UNION', 'ENUM'].includes(d.rootKind))
             .selectAll('.sourceSelector')
             .data([{side: "left"},{side:"right"}])
             .enter()

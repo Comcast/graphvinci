@@ -409,7 +409,7 @@ export default class Graph {
             };
             let fieldName = d.fieldSource.name;
             d.sourceCalc = d.source.nvm.getSourceConnectionPoint(fieldName, targetXY);
-            /*
+
             if (! d.sourceCalc) {
                 d.sourceCalc = {
                     x: 0,
@@ -422,7 +422,7 @@ export default class Graph {
                 //console.log("Here")
                 return;
             }
-             */
+
             //d.sourceCalc = d.source.nvm.getIncomingConnectionPoint(targetXY);
             if (d.source.type === 'Entity' || d.source.type === 'Domain') {
                 d.targetCalc = d.target.nvm.getIncomingConnectionPoint(d.sourceCalc);

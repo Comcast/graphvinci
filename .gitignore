@@ -41,3 +41,4 @@ static/
 
 repolinter.json
 dockerapp/public/
+manifest.yml
