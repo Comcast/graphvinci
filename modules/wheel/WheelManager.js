@@ -79,7 +79,7 @@ export default class WheelManager {
         let start = sliceNumber * this.segmentsPerWheel;
         let end = start + this.segmentsPerWheel;
         let elements = [];
-        if (end < (this.domains.length - 1)) {
+        if (end < (this.domains.length)) {
             elements.push(new NavigatorElement(sliceNumber + 1, this.get_domains_for_slice(sliceNumber + 1), "\u25B6"))
         }
         else {
