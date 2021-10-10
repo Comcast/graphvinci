@@ -38,7 +38,7 @@ class DomainMetaManager {
         // Get the default domain info
         let domainInfo = {
             default: "cmt",
-            cmt: noDomain
+            cmt: nodeObj.name
         }
         if (defaultDomainInfo) {
             domainInfo.default = defaultDomainInfo.default;

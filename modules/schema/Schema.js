@@ -228,6 +228,7 @@ export default class Schema {
         for (let type of rawTypes) {
             this._parse_node(type);
         }
+
         /*
         The third pass maps interfaces and unions, which must be aware of existing types
         */
@@ -235,6 +236,12 @@ export default class Schema {
             this._parse_interface(type)
             this._parse_union(type)
         }
+
+        /*
+        Rework relay domains, now that the node map is up to date
+        */
+        this._reparse_relays()
+
         /*
         Parse query and mutation, now that we can determine connected domain
          */
@@ -388,6 +395,22 @@ export default class Schema {
         }
         let domainInfo = domainMetaManager.parse_node_metadata(nodeObj);
         this._nodes.set(nodeObj.name, new SchemaNode(nodeObj, this._enums, this._input, "Entity", domainInfo));
+    }
+
+    _reparse_relays() {
+        for (let node of this.nodes) {
+            if (node.id.toLowerCase().endsWith('connection')) {
+                let edgeProperty = node.fields.get("edges");
+                let edgeNodeName = edgeProperty.rootName;
+                let edgeNode = this._nodes.get(edgeNodeName);
+                let targetProperty = edgeNode.fields.get("node");
+                let targetNodeName = targetProperty.rootName;
+                let targetNode = this._nodes.get(targetNodeName);
+                let targetSource = targetNode.source;
+                this._nodes.set(edgeNode.source.name, new SchemaNode(edgeNode.source, this._enums, this._input, "Entity", targetNode.domainInfo));
+                this._nodes.set(node.source.name, new SchemaNode(node.source, this._enums, this._input, "Entity", targetNode.domainInfo));
+            }
+        }
     }
 
     _parse_interface(nodeObj) {
