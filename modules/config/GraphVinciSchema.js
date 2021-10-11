@@ -16,6 +16,8 @@
 
 import {buildSchema, graphqlSync, getIntrospectionQuery} from "graphql";
 const INFO_REGEX = /^([^:]*):\s*([^\s]*)/;
+const MAPPING_REGEX = /^(.*):\s*([^:]*)/;
+
 
 export default class GraphVinciSchema {
     constructor({name, url, authorization, headers, mappings, authName, sdl, savedViews}) {
@@ -52,10 +54,25 @@ export default class GraphVinciSchema {
 
     _parse_mappings(mappingString) {
         this._mappings = {};
+        this._regex_mappings = [];
         if (! mappingString) return;
         for (let line of mappingString.split(/\n/)) {
-            let match = line.match(INFO_REGEX);
-            if (match) this._mappings[match[1]] = match[2];
+            let match = line.match(MAPPING_REGEX);
+            if (match) this._parse_mapping(match[1],match[2]);
+        }
+    }
+
+    _parse_mapping(type, value) {
+        let match = type.match( /^\/(.*)\/(.*)$/ );
+        if (match) {
+            let rg = new RegExp(match[1],match[2]);
+            this._regex_mappings.push({
+                domain: value,
+                regex: rg
+            })
+        }
+        else {
+            this._mappings[type] = value;
         }
     }
 
@@ -64,6 +81,23 @@ export default class GraphVinciSchema {
         if (mapping) {
             return {
                 cmt: mapping
+            }
+        }
+        /*
+        We don't want to use regex on individual fields.  Probably.  May need to be revisited
+         */
+        if (entity.includes(".")) {
+            return;
+        }
+        if (this._regex_mappings.length <= 0) {
+            return;
+        }
+        for (let rm of this._regex_mappings) {
+            let match = entity.match(rm.regex);
+            if (match) {
+                return {
+                    cmt: rm.domain
+                }
             }
         }
     }

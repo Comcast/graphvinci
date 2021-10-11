@@ -65,19 +65,25 @@ export default class SchemaEntryPoint extends Node {
                 Add a domain to domain edge
                  */
                 let domainSource = this.parent;
-                let domainTarget = nodeMap.get(this.schemaField.rootName).parent;
-                if (domainSource !== domainTarget) {
-                    let identifier = "From" + domainSource.id + "To" + domainTarget.id;
-                    if (!deDup.has(identifier)) {
-                        deDup.add(identifier);
-                        edges.push(new SchemaEdge(this.schemaField, domainSource, domainTarget, this.domain));
+                let domain = nodeMap.get(this.schemaField?.rootName);
+                if (domain) {
+                    let domainTarget = domain.parent;
+                    if (domainSource !== domainTarget) {
+                        let identifier = "From" + domainSource.id + "To" + domainTarget.id;
+                        if (!deDup.has(identifier)) {
+                            deDup.add(identifier);
+                            edges.push(new SchemaEdge(this.schemaField, domainSource, domainTarget, this.domain));
+                        }
                     }
+                    /*
+                    Add the Entity to domain edge, and the reverse
+                     */
+                    edges.push(new SchemaEdge(this.schemaField, this, domainTarget, this.schemaField.domain));
+                    edges.push(new SchemaEdge(this.schemaField, domainSource, nodeMap.get(this.schemaField.rootName), this.schemaField.domain));
                 }
-                /*
-                Add the Entity to domain edge, and the reverse
-                 */
-                edges.push(new SchemaEdge(this.schemaField, this, domainTarget, this.schemaField.domain));
-                edges.push(new SchemaEdge(this.schemaField, domainSource, nodeMap.get(this.schemaField.rootName), this.schemaField.domain));
+                else {
+                    console.log("How did I get here?")
+                }
             }
 
         return edges;

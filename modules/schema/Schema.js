@@ -19,7 +19,6 @@ import SchemaInput from './SchemaInput.js';
 import SchemaDomain from './SchemaDomain.js';
 import {states} from '../config/DomainState.js';
 import SchemaEntryPoint from "./SchemaEntryPoint";
-import { noDomain } from '../Constants'
 import SchemaField from "./SchemaField";
 import domainMetaManager from '../config/DomainMetaManager';
 import SchemaEnumNode from "./SchemaEnumNode";
@@ -406,9 +405,12 @@ export default class Schema {
                 let targetProperty = edgeNode.fields.get("node");
                 let targetNodeName = targetProperty.rootName;
                 let targetNode = this._nodes.get(targetNodeName);
-                let targetSource = targetNode.source;
-                this._nodes.set(edgeNode.source.name, new SchemaNode(edgeNode.source, this._enums, this._input, "Entity", targetNode.domainInfo));
-                this._nodes.set(node.source.name, new SchemaNode(node.source, this._enums, this._input, "Entity", targetNode.domainInfo));
+                if (targetNode) {
+                    let targetSource = targetNode.source;
+                    this._nodes.set(edgeNode.source.name, new SchemaNode(edgeNode.source, this._enums, this._input, "Entity", targetNode.domainInfo));
+                    this._nodes.set(node.source.name, new SchemaNode(node.source, this._enums, this._input, "Entity", targetNode.domainInfo));
+                }
+
             }
         }
     }
@@ -453,12 +455,19 @@ export default class Schema {
             (if it is defined as a type) and use that as our default.  This can still be overridden by field level
             domain info
              */
-            let domainInfo = noDomain;
+            let domainInfo = nodeObj.name;
 
             if (localNode) {
                 domainInfo = this._nodes.get(field.rootName).domainInfo;
             }
             if (field.name && field.name.startsWith("_ignore")) {
+                continue;
+            }
+            /*
+            Github have a hack to workaround https://github.com/facebook/relay/issues/112 re-exposing the root query
+            object, and I have a hack to workaround their hack
+             */
+            if (field.name && field.name.toLowerCase() === "relay") {
                 continue;
             }
             let ep = new SchemaEntryPoint(field, this._input, type, domainInfo);
