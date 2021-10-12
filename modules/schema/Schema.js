@@ -403,6 +403,10 @@ export default class Schema {
                 let edgeNodeName = edgeProperty.rootName;
                 let edgeNode = this._nodes.get(edgeNodeName);
                 let targetProperty = edgeNode.fields.get("node");
+                if (! targetProperty) {
+                    // This shouldnt really happen.  But does...
+                    continue;
+                }
                 let targetNodeName = targetProperty.rootName;
                 let targetNode = this._nodes.get(targetNodeName);
                 if (targetNode) {
