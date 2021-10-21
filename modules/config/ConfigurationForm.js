@@ -18,6 +18,7 @@ import GlobalViz from "../GlobalViz";
 import GraphVinciSchema from "./GraphVinciSchema";
 import {buildClientSchema, printSchema} from "graphql";
 import SchemaAuthorization, {NOAUTH, OAUTHCC, BEARER} from "./SchemaAuthorization";
+import d3utils from "../utils/D3Utils";
 const MASK = "*********";
 
 export default class ConfigurationForm {
@@ -179,6 +180,9 @@ export default class ConfigurationForm {
             })
             .on('mouseleave', () => {
                 this._clear_tooltip()
+            })
+            .on('click', () => {
+                d3utils.copyTextToClipboard(JSON.stringify(GlobalViz.vis?.config.get_current_schema(), null, 2))
             })
         let header = form.append('h3')
             .attr('class', 'schema-form__header')
