@@ -81,7 +81,7 @@ export default class SchemaNode extends Node {
                  */
                 let domainSource = this.parent;
                 let domainTarget = nodeMap.get(schemaField.rootName).parent;
-                if (domainSource !== domainTarget) {
+                if (domainTarget && domainSource !== domainTarget) {
                     let identifier = "From" + domainSource.id + "To" + domainTarget.id;
                     if (!deDup.has(identifier)) {
                         deDup.add(identifier);

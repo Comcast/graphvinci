@@ -24,7 +24,7 @@ export default class SchemaDomain extends Node {
     }
 
     get id() {
-        return "Domain" + this.domain;
+        return "__Domain" + this.domain;
     }
 
     get name() {

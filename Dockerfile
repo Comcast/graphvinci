@@ -1,16 +1,11 @@
-FROM node:latest
+FROM node:14
 
 # This is just temporary, until CI manages image creation
 
-COPY . /code
-RUN cd code && \
+COPY ./dockerapp /dockerapp
+RUN cd /dockerapp && \
   npm install && \
-  npm run build_container && \
-  cd dockerapp && \
-  npm install && \
-  cd ../ && \
-  mv dockerapp / && \
-  rm -r *
+  npm audit fix 
 
 WORKDIR /dockerapp
 
