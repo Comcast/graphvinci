@@ -223,5 +223,9 @@ export default class Configurator {
         }
         return null;
     }
+
+    is_search_possible() {
+        return !!(this.get_current_schema() && this.get_current_schema().url);
+    }
 }
 

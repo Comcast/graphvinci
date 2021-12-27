@@ -26,8 +26,14 @@ import Concierge from "./concierge/Concierge";
 import D3TextSizer from "./utils/D3TextSizer";
 import InputDisplay from "./input/InputDisplay";
 import './styles/app.css';
+import './styles/queryeditor.css';
 import SchemaConfigManager from "./config/SchemaConfigManager";
 import { states } from "./Constants";
+import Split from 'split.js'
+import QueryWindow from "./query/QueryWindow";
+import HistoryManager from "./history/HistoryManager";
+import QueryTopWindow from "./query/QueryTopWindow";
+import QueryBottomWindow from "./query/QueryBottomWindow";
 
 class Visualizer {
 
@@ -47,7 +53,11 @@ class Visualizer {
         this.d3text_sizer = new D3TextSizer();
         this.graph = new Graph();
         this.input_display = new InputDisplay();
-        this.config_manager = new SchemaConfigManager(this.config)
+        this.config_manager = new SchemaConfigManager(this.config);
+        this.query_window = new QueryWindow();
+        this.query_top_window = new QueryTopWindow();
+        this.query_bottom_window = new QueryBottomWindow();
+        this.history_manager = new HistoryManager();
     }
 
     build() {
@@ -130,6 +140,9 @@ class Visualizer {
             case states.Setup:
                 this._build_setup();
                 break;
+            case states.Editor:
+                this._build_editor();
+                break;
         }
 
     }
@@ -159,6 +172,86 @@ class Visualizer {
 
         this.graph.build(this.graphContainer, this.currentData);
         this.graph.run_viz(this.currentData);
+    }
+
+    _build_editor() {
+        if (!this.schema) {
+            this._build_no_schema();
+            return;
+        }
+        this._build_query_containers();
+        this.query_window.build(this.queryContainer, this.varsContainer);
+        this.query_top_window.build(this.querygraph);
+        this.query_bottom_window.build(this.resultsGraph);
+    }
+
+    _build_query_containers() {
+        this.queryVarsContainer = this.modeContainer
+            .append('div')
+            .attr('class', "querywindow")
+            .attr('id', "codevarscontainer");
+
+        this.queryContainer = this.queryVarsContainer
+            .append('div')
+            .attr('class', "querycodewindow")
+            .attr('id', "codecontainer");
+
+        this.varsContainer = this.queryVarsContainer
+            .append('div')
+            .attr('class', "queryvarswindow")
+            .attr('id', "varscontainer");
+
+        this.resultsContainer = this.modeContainer
+            .append('div')
+            .attr('class', "resultscontainer")
+            .attr('id', "resultscontainer");
+
+        this.querygraph = this.resultsContainer
+            .append('div')
+            .attr('class', "querygraph")
+            .attr('id', "querygraph");
+
+        this.resultsGraph = this.resultsContainer
+            .append('div')
+            .attr('class', "resultsgraph")
+            .attr('id', "resultsgraph");
+
+        Split(['#codevarscontainer', '#resultscontainer'], {
+            sizes: [25, 75],
+            minSize: [400, 100],
+            expandToMin: true,
+        })
+
+        Split(['#querygraph', '#resultsgraph'], {
+            sizes: [35, 65],
+            minSize: [200, 200],
+            expandToMin: true,
+            direction: "vertical"
+        })
+
+        this.varSplit = Split(['#codecontainer', '#varscontainer'], {
+            sizes: [99, 1],
+            minSize: [200, 1],
+            expandToMin: true,
+            direction: "vertical"
+        })
+    }
+
+    toggle_vars() {
+        let sizes = this.varSplit.getSizes();
+        this.varSplit.setSizes((sizes[0] <=80) ? [100, 0] : [80, 20]);
+    }
+
+    _get_current_split_percent() {
+        let h1 = this.queryContainer.style('height').slice(0, -2)
+        let h2 = this.varsContainer.style('height').slice(0, -2)
+        return Math.round((h2 / (h1 + h2) * 100))
+    }
+
+    _build_schema_containers() {
+        this.graphContainer = this.modeContainer
+            .append('div')
+            .attr('class', "graphcontainer");
     }
 
     _resize() {

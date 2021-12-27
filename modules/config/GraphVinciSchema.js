@@ -106,4 +106,8 @@ export default class GraphVinciSchema {
         let graphqlSchemaObj = buildSchema(this.sdl);
         return graphqlSync(graphqlSchemaObj, getIntrospectionQuery());
     }
+
+    get schema() {
+        return buildSchema(this.sdl);
+    }
 }

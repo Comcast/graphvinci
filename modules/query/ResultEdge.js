@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-import Configurator from './modules/config/Configurator.js';
-import Visualizer from "./modules/Visualizer.js";
-import samples from './sample-schemas.json';
+export default class ResultEdge {
+    constructor(nodeFrom, nodeTo, originId, uniqueId) {
+        this.source = nodeFrom;
+        this.target = nodeTo;
+        this.originId = originId;
+        this.uniqueId = uniqueId;
+    }
 
-let config = new Configurator(samples);
-Visualizer.initialize(config).build();
-
-window.Visualizer = Visualizer;
+    get id() {
+        return this.source.id + this.target.id + this.uniqueId;
+    }
+}

@@ -19,7 +19,7 @@ import { noDomain } from '../Constants'
 
 class DomainMetaManager {
     constructor() {
-        this.domainPatternMatch = GlobalViz.vis?.config.domainMatch || /GV\((.*?)\s*,\s*(.*?)\)/;
+        this.domainPatternMatch = /[Geeviz\.Domain|GV|GraphVinci]\((.*?)\s*,\s*(.*?)\)/;
         this.multiMatch = new RegExp(this.domainPatternMatch.source, this.domainPatternMatch.flags + "g");
     }
 
