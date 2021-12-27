@@ -79,4 +79,8 @@ export default class FlippableWindow {
             this.currentView.update(this.data)
         }
     }
+
+    refresh() {
+        this.currentView.refresh()
+    }
 }

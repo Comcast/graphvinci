@@ -184,4 +184,7 @@ export default class QueryTreeWindow extends TreeWindow {
         });
     }
 
+    refresh() {
+        // Use update instead...
+    }
 }

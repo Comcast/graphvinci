@@ -58,6 +58,8 @@ export default class QueryBottomWindow extends FlippableWindow {
             return;
         }
         if (!queryInfo.error) {
+            GlobalViz.vis?.history_manager.save(queryInfo);
+            GlobalViz.vis?.query_top_window.update_history_if_shown()
             let query = queryInfo.query;
             let variables = queryInfo.variables || {};
             GlobalViz.vis?.horizontalMenu.disable_play_button();

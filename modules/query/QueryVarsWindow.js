@@ -39,7 +39,7 @@ import GlobalViz from "../GlobalViz";
 export default class QueryVarsWindow {
 
     constructor() {
-        this.storageKey = "GeeViz.codemirror";
+        this.storageKey = "Graphvinci.codemirror";
     }
 
     get contents() {

@@ -40,13 +40,11 @@ export default class QueryButtons {
         data.push(new Separator(6, this.height, "Entity"));
         data.push(new BasicButton(this.height, this.defaultWidth, "vars", "images/buttons/json.png", "Add vars", this.add_vars));
         data.push(new Separator(20, this.height, "Group"));
-        data.push(new BasicButton(this.height, this.defaultWidth, "save", "images/buttons/history.png", "Save the query", this.add_search));
+        data.push(new BasicButton(this.height, this.defaultWidth, "save", "images/buttons/history.png", "Save the query", this.open_history));
         return data;
     }
 
-    add_search() {
-        let current = GlobalViz.vis?.query_window.contents;
-        GlobalViz.vis?.history_manager.save(current);
+    open_history() {
         GlobalViz.vis?.query_top_window.update_on_save();
     }
 

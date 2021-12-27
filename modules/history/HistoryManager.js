@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-const storage_key = "Geeviz.history.v1";
+const storage_key = "GraphVinci.history.v1";
 const preview_size = 100;
 const preview_end = "...";
+const max_history_size = 100;
 
 export default class HistoryManager {
 
@@ -24,19 +25,35 @@ export default class HistoryManager {
         this.history = {};
         let stored = localStorage.getItem(storage_key);
         if (!stored) return;
-        this.history = JSON.parse(localStorage.getItem(storage_key))
+        this.history = JSON.parse(localStorage.getItem(storage_key));
+        if (Object.keys(this.history).length > max_history_size) this.clean();
+    }
+
+    update_last_reference(op) {
+        if (this.history[op.hash_code]) {
+            this.history[op.hash_code].lastReference = + Date.now();
+            this._store();
+        }
+    }
+
+    clean() {
+        if (! this.history) return;
+        this.history = Object.fromEntries(Object.entries(this.history).sort(this.sorter).slice(0,max_history_size));
+        this._store();
     }
 
     save(op) {
+        if (! op.query || op.error) return;
         let full_query = {
             operation: op.query,
-            variables: op.variables
+            variables: op.variables,
         }
         let hash_code = this._hashCode(full_query)
         if (this.history[hash_code]) {
             console.log("Not re-saving query with hash " + hash_code)
             return;
         }
+        full_query.lastReference = + Date.now();
         full_query.hash_code = hash_code;
         this._assign_metadata(op, full_query);
         this.history[hash_code] = full_query;
@@ -79,9 +96,10 @@ export default class HistoryManager {
 
     get_history(filter) {
         let ret = [];
-        for (const hash_code in this.history) {
-            if (!this.history.hasOwnProperty(hash_code)) continue;
-            let history_entry = this.history[hash_code];
+        let list = Object.entries(this.history).sort(this.sorter);
+        for (let entry of list) {
+            let hash_code = entry[0];
+            let history_entry = entry[1];
             if (filter) {
                 if (history_entry.operation.includes(filter))
                     ret.push(history_entry);
@@ -90,6 +108,12 @@ export default class HistoryManager {
             }
         }
         return ret;
+    }
+
+    sorter = function (a,b) {
+        if (! a[1].lastReference) a[1].lastReference = + Date.now();
+        if (! b[1].lastReference) b[1].lastReference = + Date.now();
+        return b[1].lastReference - a[1].lastReference;
     }
 
     _hashCode(op) {

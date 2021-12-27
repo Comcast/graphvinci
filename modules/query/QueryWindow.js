@@ -51,7 +51,7 @@ export default class QueryWindow {
 
     constructor() {
         this.class = "querywindow";
-        this.storageKey = "GeeViz.codemirror";
+        this.storageKey = "Graphvinci.codemirror";
         this.varswindow = new QueryVarsWindow();
     }
 
@@ -139,6 +139,7 @@ export default class QueryWindow {
                 'Ctrl-Space': () =>
                     this.editor.showHint({completeSingle: true, container: myContainer}),
                 'Ctrl-Enter': () => {
+
                     GlobalViz.vis?.query_bottom_window.play();
                 }
 

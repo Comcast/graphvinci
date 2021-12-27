@@ -57,6 +57,10 @@ export default class QueryTopWindow extends FlippableWindow {
         super.update(this.currentTreeData)
     }
 
+    update_history_if_shown() {
+        super.refresh();
+    }
+
     update_on_save(revert_millis) {
         this.flip_to(topStates.Saved, revert_millis)
     }

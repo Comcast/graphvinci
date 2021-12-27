@@ -16,7 +16,7 @@
 
 import GlobalViz from "../GlobalViz";
 
-const storage_key = "GeeViz.historysearch.v1";
+const storage_key = "Graphvinci.historysearch.v1";
 
 export default class QueryHistoryWindow {
 
@@ -71,6 +71,7 @@ export default class QueryHistoryWindow {
                     GlobalViz.vis?.query_window.unswap();
                 })
                 .on('click', () => {
+                    GlobalViz.vis?.history_manager.update_last_reference(d);
                     GlobalViz.vis?.query_window.unstash();
                 })
             this.contents.append('div')
@@ -84,10 +85,12 @@ export default class QueryHistoryWindow {
         }
     }
 
-
-
     update(nodeEdgeData) {
-        // History doesn't get updated when the query changes
+        // This only covers updates from the AST
+    }
+
+    refresh() {
+        this._rebuild_list(this.current_search);
     }
 
 }

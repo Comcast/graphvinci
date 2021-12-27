@@ -77,7 +77,8 @@ export default class QueryMetaWindow {
     }
 
 
-
-
+    refresh() {
+        // Use update instead...
+    }
 
 }
