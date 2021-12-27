@@ -489,6 +489,63 @@ Styling for pushing layout
     color: #a7a7a7;
 }
 
+.vhentry {
+    width: calc(100% - 80px);
+    float: left;
+}
+
+.vhentry-even {
+    margin-top: 2px;
+    padding-left: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: url("/images/buttons/search.png") no-repeat scroll 10px 5px, #f6f6f6;
+    background-size: 20px 20px;
+    background-position: 10px 50%;
+}
+
+.vhentry-odd {
+    margin-top: 2px;
+    padding-left: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: url("/images/buttons/search.png") no-repeat scroll 10px 5px, #ffffff;
+    background-size: 20px 20px;
+    background-position: 10px 50%;
+}
+
+.vhentry-delete {
+    margin-left: 5px;
+    float: left;
+    margin-top: 2px;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: url("/images/buttons/delete-lg.png") no-repeat scroll 10px 5px, #ffffff;
+    background-size: 20px 20px;
+    background-position: 8px 50%;
+}
+.vhentry-delete:hover {
+    background: url("/images/buttons/delete-lg.png") no-repeat scroll 10px 5px, #b1b1b1;
+    background-size: 20px 20px;
+    background-position: 8px 50%;
+}
+
+.vhentry:hover {
+    background: url("/images/buttons/search.png") no-repeat scroll 10px 5px, #b1b1b1;
+    background-size: 20px 20px;
+    background-position: 10px 50%;
+}
+
+.vhentry2:hover {
+    background: url("/images/buttons/search.png") no-repeat scroll 10px 5px, #b1b1b1;
+    background-size: 30px 30px;
+    background-position: 10px 50%;
+    padding-left: 45px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .wheelcontainer {
     opacity: 0.8;
     position: absolute;

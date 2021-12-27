@@ -22,12 +22,14 @@ export const DEFAULTWIDTH = 40;
 import {states} from "../Constants"
 import GlobalViz from "../GlobalViz";
 import HMenu, {MenuData, Separator} from "./HMenu";
+import QueryButtons from "./QueryButtons";
 
 export default class HorizontalMenu extends HMenu {
     constructor(parentDiv) {
         super(parentDiv)
         this.rebuild = false;
         this.schemaButtons = new SchemaButtons(DEFAULTHEIGHT, DEFAULTWIDTH);
+        this.queryButtons = new QueryButtons(DEFAULTHEIGHT, DEFAULTWIDTH);
         this.lastOffset = 0;
     }
 
@@ -42,6 +44,16 @@ export default class HorizontalMenu extends HMenu {
         }
     }
 
+    disable_play_button() {
+        this.queryButtons.disable_play();
+        Visualizer.horizontalMenu.build();
+    }
+
+    enable_play_button() {
+        this.queryButtons.enable_play();
+        Visualizer.horizontalMenu.build();
+    }
+
     update_state() {
         super.update_state(GlobalViz.vis?.state)
     }
@@ -53,7 +65,9 @@ export default class HorizontalMenu extends HMenu {
         this.data.add_entry(new ModeButton(DEFAULTHEIGHT, DEFAULTWIDTH, states.Setup, "images/buttons/setup.png", "Setup Endpoint", () => self._switch_mode(states.Setup)));
         if (GlobalViz.vis?.config.schemaReady) {
             this.data.add_entry(new Separator(6, DEFAULTHEIGHT, "Entity"));
-            this.data.add_entry(new ModeButton(DEFAULTHEIGHT, DEFAULTWIDTH, states.Schema, "images/buttons/schema.png", "GraphVinciSchema Investigator", () => self._switch_mode(states.Schema)));
+            this.data.add_entry(new ModeButton(DEFAULTHEIGHT, DEFAULTWIDTH, states.Schema, "images/buttons/schema.png", "Schema Browser", () => self._switch_mode(states.Schema)));
+            this.data.add_entry(new Separator(6, DEFAULTHEIGHT, "Entity"));
+            this.data.add_entry(new ModeButton(DEFAULTHEIGHT, DEFAULTWIDTH, states.Editor, "images/buttons/editor.png", "Query Builder", () => self._switch_mode(states.Editor)));
         }
         this.data.add_entry(new Separator(34, DEFAULTHEIGHT, "Group", 10));
         if (GlobalViz.vis?.state === states.Schema) {
@@ -61,6 +75,12 @@ export default class HorizontalMenu extends HMenu {
                 this.data.add_entry(button);
             }
         }
+        if (GlobalViz.vis?.state === states.Editor) {
+            for (let button of this.queryButtons.get_buttons()) {
+                this.data.add_entry(button);
+            }
+        }
+
     }
 
     _switch_mode(mode) {
