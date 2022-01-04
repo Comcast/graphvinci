@@ -40,6 +40,7 @@ class Visualizer {
     initialize(configurator) {
         this.config = configurator;
         this.state = states.Schema;
+        this._cycle = false;
         this._build_components()
         GlobalViz.vis = this; // Sets a non-circular dependency globally
         return this;
@@ -58,6 +59,20 @@ class Visualizer {
         this.query_top_window = new QueryTopWindow();
         this.query_bottom_window = new QueryBottomWindow();
         this.history_manager = new HistoryManager();
+    }
+
+    start_cycle() {
+        this._cycle = true;
+    }
+
+    stop_cycle() {
+        // This is terribly hacky.  Im sorry.
+        d3.selectAll('.cycleshader').attr('opacity', 0)
+        this._cycle = false;
+    }
+
+    get cycle() {
+        return this._cycle || false;
     }
 
     build() {
@@ -96,6 +111,7 @@ class Visualizer {
     }
 
     reset_viz() {
+        this.graph.unstick();
         this.domainState = new DomainState(this.schema);
         this._build();
     }
@@ -131,7 +147,9 @@ class Visualizer {
 
     _build() {
         // Run a complete clear
+        this.stop_cycle();
         this.modeContainer.selectAll("*").remove();
+
 
         switch (this.state) {
             case states.Schema:
