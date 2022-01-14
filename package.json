@@ -26,7 +26,7 @@
     "monaco-editor": "^0.31.0",
     "codemirror": "^5.65.0",
     "codemirror-graphql": "^1.2.11",
-    "markdown-it": "^12.3.0",
+    "markdown-it": "^12.3.2",
     "prettier": "^2.5.1"
   },
   "devDependencies": {
