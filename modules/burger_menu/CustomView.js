@@ -46,6 +46,7 @@ export default class CustomView extends StackableElement {
         })
         let fGroup = group.append('g')
             .on('click', (d) => {
+                GlobalViz.vis.stop_cycle();
                 GlobalViz.vis?.graph.re_parent();
                 let data = GlobalViz.vis?.concierge.retrieve(d.name, d.category);
                 if (data) {

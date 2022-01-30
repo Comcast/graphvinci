@@ -26,6 +26,7 @@ const MINCHARGE = 10000;
 const MAXCHARGE = 10000;
 const CONDUR1 = 3000;
 const CONDUR2 = 750;
+const INTERVALDURATION = CONDUR1 + 2000;
 
 export default class Graph {
 
@@ -205,6 +206,24 @@ export default class Graph {
             d.fy = d.y;
         }
         this.kick();
+    }
+
+    cycle_viz(states) {
+        let self = this;
+        GlobalViz.vis.start_cycle();
+        let count = 1;
+        let state = states[count % states.length];
+        self.update_viz(state)
+        function cycle() {
+            if (! GlobalViz.vis.cycle) return;
+            count++;
+            state = states[count % states.length];
+            self.update_viz(state)
+            setTimeout(cycle, INTERVALDURATION);
+        }
+        setTimeout(cycle, INTERVALDURATION)
+
+
     }
 
     update_viz(conciergeState) {

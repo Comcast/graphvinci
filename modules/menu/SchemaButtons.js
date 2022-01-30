@@ -28,7 +28,7 @@ export default class SchemaButtons {
 
     get_buttons() {
         let data = [];
-        data.push(new BasicButton(this.height, this.defaultWidth, "reset", "images/buttons/reset.png", "Reset gee-viz", this.reset));
+        data.push(new BasicButton(this.height, this.defaultWidth, "reset", "images/buttons/reset.png", "Reset", this.reset));
         data.push(new Separator(20, this.height, "Group"));
         data.push(new BasicButton(this.height, this.defaultWidth, "stick", "images/buttons/stick.png", "Pin all entities", this.stick));
         data.push(new Separator(6, this.height, "Entity"));
