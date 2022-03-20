@@ -1,5 +1,5 @@
 {
-  "name": "GraphVinci",
+  "name": "@Comcast/GraphVinci",
   "version": "1.0.1",
   "description": "GraphQL Visualizer",
   "source": "index.html",
