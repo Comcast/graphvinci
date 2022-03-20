@@ -89,7 +89,7 @@ class Visualizer {
         }
     }
 
-    apply_current_schema() {
+    apply_current_schema(skip_build) {
         delete this.schemaError;
         try {
             let schema = this.config.get_current_schema().introspection;
@@ -103,7 +103,9 @@ class Visualizer {
             // boundary between modes, and also because I may well want to build them differently
             this.domainState = new DomainState(this.schema);
             //this.state = states.Schema;
-            this._build();
+            if (! skip_build) {
+                this._build();
+            }
         }catch (e) {
             this.schemaError = "SDL syntax error: " + e;
             this._build();

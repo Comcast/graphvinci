@@ -84,7 +84,7 @@ export default class HorizontalMenu extends HMenu {
     }
 
     _switch_mode(mode) {
-        GlobalViz.vis?.apply_current_schema();
+        GlobalViz.vis?.apply_current_schema(true);
         GlobalViz.vis?.set_state(mode);
         this.build();
     }
