@@ -150,7 +150,6 @@ class Visualizer {
         this.stop_cycle();
         this.modeContainer.selectAll("*").remove();
 
-
         switch (this.state) {
             case states.Schema:
                 this._build_schema();
@@ -189,7 +188,7 @@ class Visualizer {
         this._build_schema_containers();
 
         this.graph.build(this.graphContainer, this.currentData);
-        this.graph.run_viz(this.currentData);
+        //this.graph.run_viz(this.currentData);
     }
 
     _build_editor() {

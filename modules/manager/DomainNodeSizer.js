@@ -29,6 +29,7 @@ export default class DomainNodeSizer {
         this.marginY = 100;
         this.spacer = 25;
         this.domain = domain;
+        this._get_sizing();
     }
 
     _get_sizing() {
