@@ -20,7 +20,7 @@
   "author": "Dave Beaumont",
   "license": "Apache2",
   "dependencies": {
-    "d3": "^5.16.0",
+    "d3": "^7.8.2",
     "graphql": "^15.6.0",
     "jso": "^4.1.1",
     "monaco-editor": "^0.31.0",
